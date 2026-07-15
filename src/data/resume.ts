@@ -231,8 +231,9 @@ export const CERTIFICATES = [
 
 export const FUN_FACTS = [
   "Went from annotating 18,000 images to making LLMs annotate 15,856 SEC documents. Delegation arc complete.",
-  "Kaggle Notebooks Expert back in 2022, before it was cool to let the model write the notebook.",
-  "Published in IEEE Sensors Journal: graded apples with spectrophotometry and ML. Yes, apples.",
+  "Bike rider. The best debugging happens two wheels and zero screens away from the code.",
+  "Gamer. Years of boss fights turn out to be great training for production incidents.",
+  "Watches anime. A lot of anime. \"Just one more episode\" is the only estimate I've ever missed.",
   "Builds merge tooling (Preflight) because reviewing unverified AI code once was one time too many.",
   "Runs terminals with green phosphor. Obviously.",
 ];
