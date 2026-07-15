@@ -285,7 +285,7 @@ function WhyHireMeBlock() {
         <li>Numbers I own: 95% retrieval accuracy, 50% MRR lift, 60% ETL latency cut, 15,856 documents auto-coded.</li>
         <li>Full-stack data: from Debezium CDC pipelines to LangGraph agents to the PowerBI layer execs read.</li>
         <li>I use Claude Code and Codex daily, but I own the architecture, evaluation, and debugging myself.</li>
-        <li>Available May 2026 (or earlier for internships/co-ops). One email away: {CONTACT.email}</li>
+        <li>Available for full-time roles starting May 2026. One email away: {CONTACT.email}</li>
       </ul>
     </div>
   );
