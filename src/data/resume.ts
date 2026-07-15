@@ -83,24 +83,53 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    name: "Preflight — CLI-first merge helper",
-    where: "Solo project, ongoing",
-    desc: "Merge-validation system that provisions isolated Docker sandboxes, runs evidence-based checks on candidate changes, and uses agentic analysis to emit structured merge recommendations.",
+    name: "Preflight",
+    where: "Solo project · published on PyPI",
+    desc: "Sandbox-first merge validation for Python repositories. Provisions isolated Docker sandboxes, runs evidence-based checks on candidate changes, and emits structured, agentic merge recommendations.",
     stack: ["Python", "Docker", "Agentic analysis", "CLI"],
+    link: "https://github.com/SHREYAS290601/preflight",
+  },
+  {
+    name: "Idoneus",
+    where: "Solo project, ongoing",
+    desc: "CLI-first LLM inference advisor: tells you which model + quantization + runtime to run on your hardware, why, what will break, and how to verify it — deterministic rules and calibrated uncertainty, not guesswork.",
+    stack: ["Python", "LLM inference", "Quantization", "CLI"],
+    link: "https://github.com/SHREYAS290601/idoneus",
+  },
+  {
+    name: "Reality Check ATS",
+    where: "Solo project",
+    desc: "AI resume tailoring and job scanner for new-grad roles. Upload a resume, paste a job description, get a brutally honest roast plus a rewritten LaTeX experience section and tailored cover letter.",
+    stack: ["Streamlit", "PyMuPDF", "Custom LLM endpoint"],
+    link: "https://github.com/SHREYAS290601/automated_job_search_recommendations",
+  },
+  {
+    name: "PantryOps Edge (KitchenOS)",
+    where: "Solo project, ongoing",
+    desc: "Mobile-first, edge-vision grocery memory app: plans groceries, confirms purchases via checklist, enriches products from images/OCR/barcodes, tracks pantry quantities, and recommends recipes.",
+    stack: ["Python", "Edge CV", "OCR", "Mobile-first"],
+    link: "https://github.com/SHREYAS290601/KitchenOS",
+  },
+  {
+    name: "ARS.FLOW",
+    where: "Team project",
+    desc: "Platform for discovering and evaluating verification-first AI skills — public website plus a source-of-truth skills catalog and registry.",
+    stack: ["TypeScript", "Vercel", "AI skills registry"],
+    link: "https://github.com/SHREYAS290601/ars.flow-website",
   },
   {
     name: "Multi-Insurance-Agent-System",
     where: "University of Illinois",
     desc: "6-agent LangGraph architecture with OpenAI function calling and SCAN structural constraints; observability via LangSmith and Arize Phoenix; lower latency than keyword-search RAG baselines.",
     stack: ["LangGraph", "OpenAI", "LangSmith", "Arize Phoenix"],
-    link: "https://www.linkedin.com/feed/update/urn:li:activity:7432941417351757825/",
+    link: "https://github.com/SHREYAS290601/multi-agent-system",
   },
   {
     name: "Containerized Banking Data Architecture",
     where: "University of Illinois",
     desc: "End-to-end CDC pipeline (Postgres, Debezium, Kafka, MinIO, Snowflake, dbt, Airflow, GitHub Actions) sustaining ~25,000 transactions and account updates per minute.",
     stack: ["Debezium", "Kafka", "Snowflake", "dbt", "Airflow", "Docker"],
-    link: "https://www.linkedin.com/feed/update/urn:li:activity:7439474471977086977/",
+    link: "https://github.com/SHREYAS290601/banking-snowflake-dbt-airflow",
   },
   {
     name: "Automated Insurance Claim Audit Pipeline",
@@ -108,6 +137,27 @@ export const PROJECTS: Project[] = [
     desc: "Azure Databricks pipeline with Medallion Architecture and an Xception-based CV model (94% accuracy), optimized for a 4GB compute budget via Hive Metastore and MLflow.",
     stack: ["Azure Databricks", "PySpark", "MLflow", "Xception"],
     link: "https://www.linkedin.com/feed/update/urn:li:activity:7429979052737974272/",
+  },
+];
+
+export interface Org {
+  handle: string;
+  desc: string;
+}
+
+// Org work is in private repos — described here at a high level only.
+export const ORGS: Org[] = [
+  {
+    handle: "GiesDSRS",
+    desc: "Data Science Research Services, Gies College of Business — agentic RAG, knowledge-base ingestion, research data tooling (private repos)",
+  },
+  {
+    handle: "gies-ai-hub",
+    desc: "AI learning platform engineering at Gies (private repos)",
+  },
+  {
+    handle: "uiucdisruptionlab",
+    desc: "UIUC Disruption Lab — applied emerging-tech projects (private repos)",
   },
 ];
 

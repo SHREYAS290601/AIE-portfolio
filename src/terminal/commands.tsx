@@ -9,6 +9,7 @@ import {
   FUN_FACTS,
 } from "../data/resume";
 import { PERSONAS, PERSONA_KEYS, type PersonaKey } from "../data/personas";
+import GithubBlock from "./GithubBlock";
 
 export type ThemeName = "green" | "amber";
 
@@ -44,6 +45,7 @@ export const COMMANDS: CommandSpec[] = [
   { name: "/projects", description: "selected systems I built", requiresPersona: true },
   { name: "/certificates", description: "certifications", requiresPersona: true },
   { name: "/education", description: "degrees and GPAs", requiresPersona: true },
+  { name: "/github", description: "live feed of my latest repos + orgs", requiresPersona: false },
   { name: "/contact", description: "email, phone, links", requiresPersona: false },
   { name: "/resume", description: "one-screen resume summary", requiresPersona: true },
   { name: "/socials", description: "where else to find me", requiresPersona: true },
@@ -203,15 +205,16 @@ function ProjectsBlock({ persona }: { persona: PersonaKey }) {
           {p.link && (
             <p>
               <a href={p.link} target="_blank" rel="noreferrer">
-                demo / write-up ↗
+                {p.link.includes("github.com") ? "source ↗" : "demo / write-up ↗"}
               </a>
             </p>
           )}
         </div>
       ))}
       {persona === "haters" && (
-        <p className="hint">Four real systems. Zero todo-list apps. Sorry to disappoint.</p>
+        <p className="hint">Eight real systems. Zero todo-list apps. Sorry to disappoint.</p>
       )}
+      <p className="hint">Want the live list straight from the GitHub API? Run /github.</p>
     </div>
   );
 }
@@ -481,6 +484,9 @@ export function runCommand(raw: string, state: TermState): CommandResult {
       return { output: <WhoamiBlock persona={state.persona} /> };
     case "contact":
       return { output: <div className="out-block"><ContactBlock /></div> };
+    case "github":
+    case "gh":
+      return { output: <GithubBlock /> };
     case "theme": {
       if (arg === "green" || arg === "amber") {
         return {

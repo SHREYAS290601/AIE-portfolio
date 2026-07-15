@@ -113,9 +113,54 @@ input:focus-visible {
     radial-gradient(ellipse at center, transparent 58%, rgba(0, 0, 0, 0.32) 100%);
 }
 
+/* slow refresh band drifting down the tube */
+.crt-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.028) 45%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.028) 55%,
+    transparent 100%
+  );
+  background-size: 100% 22rem;
+  background-repeat: no-repeat;
+  background-position: 0 -22rem;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .crt-screen {
-    animation: crt-flicker 8s infinite;
+    animation:
+      crt-power-on 0.55s cubic-bezier(0.23, 1, 0.32, 1) 1,
+      crt-flicker 8s 0.6s infinite;
+  }
+
+  .crt-screen::before {
+    animation: crt-sweep 10s linear 1.2s infinite;
+  }
+
+  .crt-screen.degauss {
+    animation: crt-degauss 0.5s ease-out 1;
+  }
+
+  @keyframes crt-power-on {
+    0% {
+      transform: scaleY(0.004) scaleX(0.6);
+      filter: brightness(6);
+    }
+    55% {
+      transform: scaleY(0.02) scaleX(1);
+      filter: brightness(4);
+    }
+    100% {
+      transform: scale(1);
+      filter: brightness(1);
+    }
   }
 
   @keyframes crt-flicker {
@@ -123,6 +168,76 @@ input:focus-visible {
     92% { opacity: 1; }
     93% { opacity: 0.96; }
     94% { opacity: 1; }
+  }
+
+  @keyframes crt-sweep {
+    0% { background-position: 0 -22rem; }
+    62% { background-position: 0 calc(100% + 22rem); }
+    100% { background-position: 0 calc(100% + 22rem); }
+  }
+
+  @keyframes crt-degauss {
+    0% { transform: scale(1); filter: none; }
+    20% { transform: scale(1.012, 0.985) skewX(0.6deg); filter: brightness(1.7) saturate(2.2); }
+    45% { transform: scale(0.992, 1.01) skewX(-0.5deg); filter: brightness(1.25); }
+    70% { transform: scale(1.004, 0.997); filter: brightness(1.08); }
+    100% { transform: scale(1); filter: none; }
+  }
+}
+
+/* -- teletype output reveal ---------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .entry-fresh .echo-line {
+    animation: tty-flicker-in 0.16s steps(2) both;
+  }
+
+  .entry-fresh .out-block {
+    animation: tty-wipe 0.4s steps(12) both;
+  }
+
+  .entry-fresh .out-block li,
+  .entry-fresh .out-block .kv > * {
+    opacity: 0;
+    animation: tty-flicker-in 0.14s steps(2) forwards;
+  }
+
+  .entry-fresh .out-block li:nth-child(1),
+  .entry-fresh .out-block .kv > :nth-child(-n + 2) { animation-delay: 0.1s; }
+  .entry-fresh .out-block li:nth-child(2),
+  .entry-fresh .out-block .kv > :nth-child(n + 3):nth-child(-n + 4) { animation-delay: 0.19s; }
+  .entry-fresh .out-block li:nth-child(3),
+  .entry-fresh .out-block .kv > :nth-child(n + 5):nth-child(-n + 6) { animation-delay: 0.28s; }
+  .entry-fresh .out-block li:nth-child(4),
+  .entry-fresh .out-block .kv > :nth-child(n + 7):nth-child(-n + 8) { animation-delay: 0.37s; }
+  .entry-fresh .out-block li:nth-child(5),
+  .entry-fresh .out-block .kv > :nth-child(n + 9):nth-child(-n + 10) { animation-delay: 0.46s; }
+  .entry-fresh .out-block li:nth-child(6),
+  .entry-fresh .out-block .kv > :nth-child(n + 11) { animation-delay: 0.55s; }
+  .entry-fresh .out-block li:nth-child(n + 7) { animation-delay: 0.64s; }
+
+  @keyframes tty-wipe {
+    from { clip-path: inset(0 0 100% 0); }
+    to { clip-path: inset(0 0 -0.5rem 0); }
+  }
+
+  @keyframes tty-flicker-in {
+    0% { opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+
+  /* boot lines type themselves out */
+  .boot-line {
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: fit-content;
+    animation: tty-type 0.28s steps(24, end) both;
+  }
+
+  @keyframes tty-type {
+    from { max-width: 0; }
+    to { max-width: 100%; }
   }
 }
 
@@ -274,6 +389,12 @@ ul.plain li::marker {
 
 .term-input:focus {
   outline: none;
+}
+
+@supports (caret-shape: block) {
+  .term-input {
+    caret-shape: block;
+  }
 }
 
 .input-line:focus-within::before {

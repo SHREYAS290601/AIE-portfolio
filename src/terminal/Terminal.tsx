@@ -71,6 +71,14 @@ export default function Terminal() {
       const result = runCommand(trimmed, { persona });
       if (result.theme) {
         document.documentElement.dataset.theme = result.theme satisfies ThemeName;
+        // degauss wobble, like slapping the side of the monitor
+        const screen = document.querySelector(".crt-screen");
+        if (screen) {
+          screen.classList.remove("degauss");
+          void (screen as HTMLElement).offsetWidth; // restart animation
+          screen.classList.add("degauss");
+          setTimeout(() => screen.classList.remove("degauss"), 600);
+        }
       }
       if (result.setPersona !== undefined || result.leavePersona) {
         setPersona(result.leavePersona ? null : (result.setPersona ?? null));
@@ -202,8 +210,8 @@ export default function Terminal() {
         </p>
 
         <div role="log" aria-label="Terminal output">
-          {entries.map((en) => (
-            <div className="entry" key={en.id}>
+          {entries.map((en, i) => (
+            <div className={i === entries.length - 1 ? "entry entry-fresh" : "entry"} key={en.id}>
               <div className="echo-line">
                 <span className="prompt-tag">{en.prompt}</span> {en.input}
               </div>

@@ -29,7 +29,7 @@ function Boot({ onDone }: { onDone: () => void }) {
   return (
     <div className="term-output" aria-hidden="true">
       {BOOT_LINES.slice(0, shown).map((l) => (
-        <p key={l} className="dim">{l}</p>
+        <p key={l} className="dim boot-line">{l}</p>
       ))}
     </div>
   );
