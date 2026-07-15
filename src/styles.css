@@ -12,6 +12,8 @@
   --link: #7fd4ff;
   --border: #1d4d1d;
   --glow: 0 0 6px rgba(51, 255, 51, 0.45);
+  --pop-bg: rgba(51, 255, 51, 0.05);
+  --pop-glow: rgba(51, 255, 51, 0.16);
   --font-mono: "Menlo", "Consolas", "Liberation Mono", "Courier New", monospace;
 }
 
@@ -25,6 +27,8 @@
   --accent: #7fd4ff;
   --border: #4d3a10;
   --glow: 0 0 6px rgba(255, 176, 0, 0.4);
+  --pop-bg: rgba(255, 176, 0, 0.06);
+  --pop-glow: rgba(255, 176, 0, 0.18);
 }
 
 * {
@@ -280,7 +284,9 @@ input:focus-visible {
 }
 
 .entry {
-  margin-bottom: 0.85rem;
+  margin-bottom: 1.15rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--border);
 }
 
 .echo-line {
@@ -366,8 +372,23 @@ ul.plain li::marker {
   display: flex;
   align-items: baseline;
   gap: 0.55ch;
-  margin-top: 0.4rem;
+  margin-top: 0.9rem;
   position: relative;
+  background: var(--pop-bg);
+  border: 1px solid var(--phosphor-dim);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  box-shadow:
+    0 0 0.9rem var(--pop-glow),
+    inset 0 0 0.6rem rgba(0, 0, 0, 0.35);
+}
+
+.input-line:focus-within {
+  border-color: var(--phosphor);
+  box-shadow:
+    0 0 1.3rem var(--pop-glow),
+    0 0 0.25rem var(--pop-glow),
+    inset 0 0 0.6rem rgba(0, 0, 0, 0.35);
 }
 
 .input-line .prompt-tag {
@@ -397,14 +418,6 @@ ul.plain li::marker {
   }
 }
 
-.input-line:focus-within::before {
-  content: "";
-  position: absolute;
-  inset: -0.25rem -0.35rem;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  pointer-events: none;
-}
 
 /* -- slash command menu (Claude Code style) ------------------------------ */
 
