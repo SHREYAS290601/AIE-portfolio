@@ -3,12 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Portfolio of Shreyas Kulkarni: data scientist and AI systems engineer working on agentic RAG, LLM evaluation, and cloud data platforms."
+    />
     <title>Shreyas Kulkarni | AI Systems Portfolio</title>
     <style>
       :root {
         --ink: #10213a;
         --ink-soft: #42556f;
-        --muted: #6b7d95;
+        --muted: #5c6e86;
         --line: #d8e3ef;
         --page: #ffffff;
         --bg: #eef4f9;
@@ -131,6 +135,16 @@
         color: inherit;
         text-decoration: none;
         border-bottom: 1px solid rgba(215, 230, 255, 0.5);
+      }
+
+      a:focus-visible {
+        outline: 3px solid var(--blue);
+        outline-offset: 2px;
+        border-radius: 3px;
+      }
+
+      .hero-header a:focus-visible {
+        outline-color: #ffffff;
       }
 
       .grid-2 {
@@ -446,10 +460,10 @@
           <h1 class="name">Shreyas Sachin Kulkarni</h1>
           <p class="tagline">AI Systems Engineer | RAG, Multi-Agent Workflows, Data Platforms</p>
           <div class="contact-line">
-            <span>(217) 866-6174</span>
+            <a href="tel:+12178666174">(217) 866-6174</a>
             <a href="mailto:ssk16@illinois.edu">ssk16@illinois.edu</a>
-            <span>linkedin.com/in/shreyaskulkarni29</span>
-            <span>portfolio-shreyas-kulkarni.netlify.app</span>
+            <a href="https://www.linkedin.com/in/shreyaskulkarni29/">linkedin.com/in/shreyaskulkarni29</a>
+            <span>shreyas290601.github.io/AIE-portfolio</span>
           </div>
         </header>
 
@@ -477,8 +491,8 @@
               <p class="metric-label">MRR lift from chunking and ranking tests</p>
             </article>
             <article class="card soft-rose">
-              <div class="metric-value">470K+</div>
-              <p class="metric-label">records processed in PySpark analytics pipelines</p>
+              <div class="metric-value">15,856</div>
+              <p class="metric-label">SEC enforcement documents auto-coded with 70+ variables</p>
             </article>
             <article class="card soft-blue">
               <div class="metric-value">25K/min</div>
@@ -522,8 +536,13 @@
             <span class="chip">SQL</span>
             <span class="chip">LangGraph</span>
             <span class="chip">LangChain</span>
+            <span class="chip">Claude Code</span>
+            <span class="chip">Codex</span>
+            <span class="chip">FastAPI</span>
             <span class="chip">OpenAI API</span>
             <span class="chip">AWS Bedrock</span>
+            <span class="chip">PGVector</span>
+            <span class="chip">MongoDB</span>
             <span class="chip">Vertex AI</span>
             <span class="chip">Docker</span>
             <span class="chip">Kubernetes</span>
@@ -565,12 +584,14 @@
         <div class="experience-list">
           <article class="card experience-card">
             <span class="eyebrow">Jul 2025 - Present</span>
-            <h3 class="role">AI Engineering Intern | Data Science Research Services, UIUC</h3>
+            <h3 class="role">Data Scientist | Data Science Research Services (DSRS), UIUC</h3>
             <ul class="bullets">
-              <li>Architected agentic RAG with LangGraph decision trees and Qwen3-32B, reaching 95% retrieval accuracy.</li>
-              <li>Improved retrieval quality by 50% through A/B tests on chunking, hybrid search, and custom scoring.</li>
-              <li>Built async ETL and ingestion pipelines across Azure, AWS Bedrock, MongoDB, and PostgreSQL vector stores.</li>
-              <li>Created operational dashboards over 8,700+ events to translate system behavior into decisions.</li>
+              <li>Architected an agentic RAG orchestration layer with LangGraph decision trees and Qwen-3-32B, reaching 95% retrieval accuracy, then migrated the workflow to Claude Code and Codex skills backed by FastAPI.</li>
+              <li>Lifted Mean Reciprocal Rank by 50% through statistical A/B tests across custom scoring, hybrid search, and semantic chunking strategies.</li>
+              <li>Accelerated production ETL to 1,000+ event records per 1.5s with 60%+ lower latency via async pagination on Azure Container Instances.</li>
+              <li>Loaded 7,000+ documents into vector stores in under 10 seconds with 100% data integrity using multiprocessing, Pydantic validation, MongoDB, and PostgreSQL.</li>
+              <li>Automated 70+ structured variables across 15,856 SEC enforcement documents (2010-2025) by pairing DeepSeek-V4 Flash LLM coding with regex-based violation detection.</li>
+              <li>Built a 10K+ row workflow-routing benchmark with rule-based labels and group validation, reaching 0.641 macro F1 and 0.906 top-3 accuracy on unseen seed groups.</li>
             </ul>
           </article>
 
@@ -600,7 +621,7 @@
           <article class="card soft-rose">
             <span class="eyebrow">Education</span>
             <p class="body small">
-              M.S. Information Science, UIUC (3.96 GPA)<br />
+              M.S. Information Science, UIUC (3.93 GPA)<br />
               B.E. Computer Engineering, SPPU (3.86 GPA)
             </p>
             <p class="body tiny">Focus: distributed systems, AI design, and cloud architecture.</p>
@@ -625,6 +646,7 @@
 
         <div class="chips tight">
           <span class="chip dark">RAG eval</span>
+          <span class="chip dark">Embedding benchmarks</span>
           <span class="chip dark">Docker</span>
           <span class="chip dark">AWS/GCP/Azure</span>
           <span class="chip dark">Vector DBs</span>
