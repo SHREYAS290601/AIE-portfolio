@@ -163,7 +163,9 @@ function RoleArticle({ r }: { r: Role }) {
       </ul>
       {log.length > 0 && (
         <details className="log">
-          <summary>Full log ({log.length})</summary>
+          <summary>
+            Full log ({log.length})<span className="sr-only"> for {r.org}</span>
+          </summary>
           <ul className="log-list" data-run="oneshot">
             {log.map((f) => (
               <li key={f.id} data-unit="canvas">

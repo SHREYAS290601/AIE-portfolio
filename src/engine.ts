@@ -26,6 +26,8 @@ const EMIT_HOLD_MS = 400; // keeps pool glyph flashes under 3 per second
 const RECOUNT_MS = 300;
 const PARTICLE_CAP = 3000;
 const SPLIT_PX = 4;
+const GHOST_PURPLE = "#6930C3";
+const GHOST_CYAN = "#64DFDF";
 
 const ease = gsap.parseEase("power3.inOut");
 const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
@@ -65,6 +67,8 @@ type Run = {
   cloud: boolean; // glyphs detour through a scattered cloud before sorting into place
   collapse: Collapse[]; // glyphs from the rest of the page that stream back into the pool
   st?: ScrollTrigger;
+  near: boolean; // within a viewport of the screen (IntersectionObserver); far runs skip rect reads
+  offSynced: boolean; // last frame was off-screen, so its clones are already hidden
 };
 const COLLAPSE_CAP = 1500;
 const COLLAPSE_END = 0.4; // share of the contact run spent collapsing the page
@@ -77,45 +81,55 @@ type SvgBox = {
 
 /* ---------- glyph atlas: each glyph rasterized once, then blitted ---------- */
 
-type Cell = { x: number; y: number; w: number; h: number };
+// Multi-page atlas: a full page opens a new one instead of resetting (a reset mid-scroll
+// re-rasterizes everything and shows up as long tasks).
+type Cell = { page: HTMLCanvasElement; x: number; y: number; w: number; h: number };
+const ATLAS_PAGE = 2048;
 class Atlas {
-  readonly canvas = document.createElement("canvas");
-  private ctx = this.canvas.getContext("2d")!;
+  private pages: CanvasRenderingContext2D[] = [];
   private cells = new Map<string, Cell>();
   private cx = 0;
   private cy = 0;
   private rowH = 0;
   constructor(private dpr: number) {
-    this.canvas.width = this.canvas.height = 2048;
+    this.addPage();
+  }
+  private addPage() {
+    const c = document.createElement("canvas");
+    c.width = c.height = ATLAS_PAGE;
+    this.pages.push(c.getContext("2d")!);
+    this.cx = this.cy = this.rowH = 0;
+  }
+  has(ch: string, font: string, color: string) {
+    return this.cells.has(font + "|" + color + "|" + ch);
   }
   cell(ch: string, font: string, color: string): Cell {
     const key = font + "|" + color + "|" + ch;
     const hit = this.cells.get(key);
     if (hit) return hit;
-    const { ctx, dpr: d } = this;
+    const d = this.dpr;
+    let ctx = this.pages[this.pages.length - 1];
     ctx.setTransform(d, 0, 0, d, 0, 0);
     ctx.font = font;
     const m = ctx.measureText(ch);
     const asc = m.fontBoundingBoxAscent;
     const w = Math.ceil((m.width + 2) * d);
     const h = Math.ceil((asc + m.fontBoundingBoxDescent) * d);
-    if (this.cx + w > this.canvas.width) {
+    if (this.cx + w > ATLAS_PAGE) {
       this.cx = 0;
       this.cy += this.rowH;
       this.rowH = 0;
     }
-    if (this.cy + h > this.canvas.height) {
-      // ponytail: full reset when the atlas fills; one page's glyph set fits easily at 2048²
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (this.cy + h > ATLAS_PAGE) {
+      this.addPage();
+      ctx = this.pages[this.pages.length - 1];
       ctx.setTransform(d, 0, 0, d, 0, 0);
-      this.cells.clear();
-      this.cx = this.cy = this.rowH = 0;
+      ctx.font = font;
     }
     ctx.fillStyle = color;
     ctx.textBaseline = "alphabetic";
     ctx.fillText(ch, this.cx / d + 1, this.cy / d + asc);
-    const cell = { x: this.cx, y: this.cy, w, h };
+    const cell = { page: ctx.canvas, x: this.cx, y: this.cy, w, h };
     this.cx += w + 2;
     this.rowH = Math.max(this.rowH, h + 2);
     this.cells.set(key, cell);
@@ -271,7 +285,8 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
   const twin = document.querySelector<HTMLElement>(".pool-twin")!;
   const hudGlyphs = document.getElementById("hud-glyphs")!;
   const hudNodes = document.getElementById("hud-nodes")!;
-  const atlas = new Atlas(dpr);
+  // Glyphs are mid-flight when drawn and hand off to crisp DOM text, so 1.5x is plenty; it halves atlas area at 2x DPR.
+  const atlas = new Atlas(Math.min(1.5, dpr));
 
   const vw = innerWidth, vh = innerHeight;
   canvas.width = Math.round(vw * dpr);
@@ -408,6 +423,8 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
       srcs: collapse && !mobile ? srcsHero : srcs,
       cloud: section.dataset.cloud === "1",
       collapse: [],
+      near: true, // until the observer reports
+      offSynced: false,
     };
   }
 
@@ -566,13 +583,19 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
     if (!dirty && now - resizeAt > RECOUNT_MS + 50 && !emitOn.some(Boolean)) return;
     dirty = false;
 
-    // READ
+    // READ: only runs near the viewport (IntersectionObserver), plus every run while CONTACT
+    // collapses, since the page's glyphs fly home from wherever their sections sit.
     const sx = Math.round(scrollX), sy = Math.round(scrollY);
+    const collapsing = !!contactRun && contactRun.near && contactRun.p < COLLAPSE_END;
     for (const r of runs) {
+      if (!r.near && !collapsing) {
+        r.visible = false;
+        continue;
+      }
       const b = r.section.getBoundingClientRect();
       r.top = b.top;
       r.left = b.left;
-      r.visible = b.bottom > 0 && b.top < vh;
+      r.visible = r.near && b.bottom > 0 && b.top < vh;
     }
 
     // WRITE
@@ -600,7 +623,7 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
             const h = c.g.h + (dst.h - c.g.h) * e;
             const cell = atlas.cell(t > 0.7 ? pangram[c.g.src] : c.g.ch, c.g.font, c.g.color);
             c2d.globalAlpha = 1 - t * 0.5;
-            c2d.drawImage(atlas.canvas, cell.x, cell.y, cell.w, cell.h, x0 + (dst.x - x0) * e - 1, y0 + (dst.y - y0) * e, (cell.w / cell.h) * h, h);
+            c2d.drawImage(cell.page, cell.x, cell.y, cell.w, cell.h, x0 + (dst.x - x0) * e - 1, y0 + (dst.y - y0) * e, (cell.w / cell.h) * h, h);
           }
           c2d.globalAlpha = 1;
         }
@@ -620,6 +643,13 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
         const handoff = clamp01((uu - 0.9) / 0.1);
         const op = handoff.toFixed(3);
         if (u.op !== op) (u.el.style.opacity = op), (u.op = op);
+        // Off-screen fast path: nothing to draw; count landed glyphs without walking them.
+        // One full pass after leaving the screen hides any clones still showing.
+        if (!r.visible && r.offSynced) {
+          if (uu >= 1) landed += u.glyphs.length;
+          else if (uu > 0) for (const g of u.glyphs) if (uu - g.s >= FLIGHT) landed++;
+          continue;
+        }
         for (const g of u.glyphs) {
           const t = clamp01((uu - g.s) / FLIGHT);
           if (t >= 1) landed++;
@@ -661,21 +691,23 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
             const cell = atlas.cell(ch, g.font, g.color);
             const dw = (cell.w / cell.h) * h;
             const alpha = 1 - handoff;
-            if (t < 1) {
+            // RGB-split ghosts on one glyph in three: reads the same in a burst, a third of the draws.
+            if (t < 1 && g.seed % 3 === 0) {
               const k = Math.sin(Math.PI * t) * SPLIT_PX;
-              const pc = atlas.cell(ch, g.font, "#6930C3");
-              const cc = atlas.cell(ch, g.font, "#64DFDF");
+              const pc = atlas.cell(ch, g.font, GHOST_PURPLE);
+              const cc = atlas.cell(ch, g.font, GHOST_CYAN);
               c2d.globalAlpha = alpha * 0.6;
-              c2d.drawImage(atlas.canvas, pc.x, pc.y, pc.w, pc.h, x - 1 - k, y, dw, h);
-              c2d.drawImage(atlas.canvas, cc.x, cc.y, cc.w, cc.h, x - 1 + k, y, dw, h);
+              c2d.drawImage(pc.page, pc.x, pc.y, pc.w, pc.h, x - 1 - k, y, dw, h);
+              c2d.drawImage(cc.page, cc.x, cc.y, cc.w, cc.h, x - 1 + k, y, dw, h);
             }
             c2d.globalAlpha = alpha;
-            c2d.drawImage(atlas.canvas, cell.x, cell.y, cell.w, cell.h, x - 1, y, dw, h);
+            c2d.drawImage(cell.page, cell.x, cell.y, cell.w, cell.h, x - 1, y, dw, h);
           }
         }
       }
     }
     c2d.globalAlpha = 1;
+    for (const r of runs) r.offSynced = !r.visible;
 
     // Source glyphs stutter while they emit (held, so at most ~2.5 flashes per second).
     for (let i = 0; i < emitOn.length; i++) {
@@ -840,11 +872,58 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
   };
   document.addEventListener("toggle", onToggle, true); // toggle does not bubble; capture catches it
 
+  // Which runs are within one viewport of the screen; far runs skip per-frame rect reads.
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        const r = runs.find((x) => x.section === e.target);
+        if (r) r.near = e.isIntersecting;
+      }
+      markDirty();
+    },
+    { rootMargin: "100% 0px" },
+  );
+  runs.forEach((r) => io.observe(r.section));
+
+  // Pre-rasterize every glyph the page will draw, in idle time, so first flights never stall.
+  const warm: [string, string, string][] = [];
+  const seen = new Set<string>();
+  const want = (ch: string, font: string, color: string) => {
+    const k = font + "|" + color + "|" + ch;
+    if (!seen.has(k)) (seen.add(k), warm.push([ch, font, color]));
+  };
+  if (!mobile) {
+    for (const r of runs) for (const u of r.units) for (const g of u.glyphs) {
+      want(g.ch, g.font, g.color);
+      want(g.from, g.font, g.color);
+      if (u.mode === "canvas" && g.seed % 3 === 0) {
+        want(g.ch, g.font, GHOST_PURPLE);
+        want(g.ch, g.font, GHOST_CYAN);
+      }
+      if (g.mutate) for (const c of /\d/.test(g.ch) ? DIGITS : SYMS) want(c, g.font, g.color);
+    }
+  }
+  // 6 ms slices on timers, not requestIdleCallback: an always-animating page rarely goes idle,
+  // so idle callbacks starved and glyphs still rasterized mid-flight.
+  let warmHandle = 0;
+  const warmStep = () => {
+    const end = performance.now() + 6;
+    while (warm.length && performance.now() < end) {
+      const [ch, font, color] = warm.pop()!;
+      if (!atlas.has(ch, font, color)) atlas.cell(ch, font, color);
+    }
+    if (warm.length) warmHandle = window.setTimeout(warmStep, 0);
+  };
+  warmHandle = window.setTimeout(warmStep, 0);
+  const cancelIdle = window.clearTimeout;
+
   gsap.ticker.add(render);
   ScrollTrigger.refresh();
 
   return () => {
     gsap.ticker.remove(render);
+    io.disconnect();
+    cancelIdle(warmHandle);
     document.removeEventListener("toggle", onToggle, true);
     oneShots.forEach(({ tween }) => tween.kill());
     ctx.revert();
