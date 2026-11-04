@@ -145,7 +145,7 @@ const SIGNAL_SPEC: SignalSpec[] = [
   { fact: "premier.indexing", value: "52x", caption: "heaviest recomputation, 14.3 s to 0.27 s, via read-only indexes." },
   { fact: "uiuc-ai.cost", value: "$0.04", caption: "per graded submission: 860 submissions, $35 total." },
   { fact: "uiuc-ai.reliability", value: "317 + 46", caption: "correctness and fault-injection checks on the LLM grader." },
-  { fact: "premier.multi-agent", value: "7/7", caption: "correct answers from a local multi-agent system, zero unsupported numerical outputs." },
+  { fact: "premier.star-schema", value: "~8 ms", caption: "refresh work for an unchanged grower, versus 360 ms for a full recomputation." },
   { fact: "dsrs.agentic-rag", value: "95%", caption: "retrieval accuracy, agentic RAG on LangGraph and Qwen-3-32B." },
   { fact: "dsrs.ab-tests", value: "+50%", caption: "retrieval precision and MRR, from A/B-tested search strategies." },
 ];

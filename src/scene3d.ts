@@ -1,7 +1,8 @@
 import {
-  AdditiveBlending, BufferAttribute, BufferGeometry, Group, Line, LineBasicMaterial, LineDashedMaterial,
-  LineSegments, Mesh, OrthographicCamera, PerspectiveCamera, PlaneGeometry, Points, PointsMaterial, Scene,
-  ShaderMaterial, SphereGeometry, Vector2, Vector3, WebGLRenderTarget, WebGLRenderer,
+  AdditiveBlending, BufferAttribute, BufferGeometry, DodecahedronGeometry, EdgesGeometry, Group, IcosahedronGeometry,
+  Line, LineBasicMaterial, LineDashedMaterial, LineSegments, Mesh, OctahedronGeometry, OrthographicCamera,
+  PerspectiveCamera, PlaneGeometry, Points, PointsMaterial, Scene, ShaderMaterial, SphereGeometry,
+  TetrahedronGeometry, TorusGeometry, Vector2, Vector3, WebGLRenderTarget, WebGLRenderer,
 } from "three";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -369,6 +370,61 @@ export function startScene(canvas: HTMLCanvasElement): () => void {
   }))));
   scene.add(new LineSegments(track(draw(geom(constLines), 0.22, 0.5, 2)), track(ink(0.35))));
 
+  /* seam solids: small wireframe solids parked on each section boundary, in page pixels.
+     Three plates (ink, pink, green) misregister with scroll speed; each tears on its own clock. */
+  const gapScene = new Scene();
+  const gapCam = new OrthographicCamera(0, 1, 0, -1, -1000, 1000);
+  type Seam = { plates: LineSegments[]; docY: number; xf: number; size: number; spin: number; until: number; next: number; jx: number; jy: number };
+  const seams: Seam[] = [];
+  if (!mobile && !reduced) {
+    const shapes = [
+      () => new IcosahedronGeometry(1, 0), () => new OctahedronGeometry(1, 0), () => new DodecahedronGeometry(1, 0),
+      () => new TetrahedronGeometry(1, 0), () => new TorusGeometry(0.8, 0.32, 5, 9), () => new IcosahedronGeometry(1, 1),
+    ];
+    shapes.forEach((make, i) => {
+      const edges = track(new EdgesGeometry(track(make())));
+      const plates = [INK, "#ff2e97", "#00ff85"].map((color, k) => {
+        const ls = new LineSegments(edges, track(new LineBasicMaterial({
+          color, transparent: true, opacity: k ? 0.5 : 0.75, blending: AdditiveBlending, depthTest: false, depthWrite: false,
+        })));
+        gapScene.add(ls);
+        return ls;
+      });
+      seams.push({ plates, docY: -1e4, xf: i % 2 ? 0.13 : 0.87, size: 30 + (i % 3) * 9, spin: i % 2 ? -1 : 1, until: 0, next: 1 + i * 0.7, jx: 0, jy: 0 });
+    });
+  }
+  // Boundary = top of each section after the first (its pin spacer when pinned). Read only on ScrollTrigger refresh.
+  const layoutSeams = () => {
+    const secs = document.querySelectorAll<HTMLElement>("main > section, main > .pin-spacer > section");
+    seams.forEach((s, i) => {
+      const sec = secs[i + 1];
+      const box = sec?.parentElement?.classList.contains("pin-spacer") ? sec.parentElement : sec;
+      s.docY = box ? box.getBoundingClientRect().top + scrollY : -1e4;
+    });
+  };
+  const renderSeams = (time: number) => {
+    const sy = scrollY, h = innerHeight, w = innerWidth;
+    for (const s of seams) {
+      const y = s.docY - sy;
+      const vis = y > -120 && y < h + 120;
+      s.plates.forEach((p) => (p.visible = vis));
+      if (!vis) continue;
+      if (time > s.next) {
+        s.until = time + gsap.utils.random(0.08, 0.18);
+        s.next = s.until + gsap.utils.random(1.6, 4); // at most one tear per object every 1.6 s
+        s.jx = gsap.utils.random(-16, 16, 4);
+        s.jy = gsap.utils.random(-6, 6, 2);
+      }
+      const tear = time < s.until;
+      const d = (tear ? 7 : 1.5) * state.shift;
+      s.plates.forEach((p, k) => {
+        p.position.set(s.xf * w + (tear ? s.jx : 0) + (k === 1 ? -d : k === 2 ? d : 0), -y + (tear ? s.jy : 0), 0);
+        p.rotation.set(time * 0.3 * s.spin + y * 0.003, time * 0.45 * s.spin, 0);
+        p.scale.set(s.size * (tear ? 1.3 : 1), s.size * (tear ? 0.5 : 1), s.size);
+      });
+    }
+  };
+
   /* post pass */
   const postScene = new Scene();
   const postCam = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -389,6 +445,9 @@ export function startScene(canvas: HTMLCanvasElement): () => void {
     postU.uRes.value.set(w * px, h * px);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
+    gapCam.right = w;
+    gapCam.bottom = -h;
+    gapCam.updateProjectionMatrix();
     // Text lives on the left on desktop, so the composition sits right; on phones it centers behind the text, dimmer.
     world.position.x = mobile ? -4.6 : 0;
     world.scale.setScalar(mobile ? 0.7 : 1);
@@ -434,6 +493,12 @@ export function startScene(canvas: HTMLCanvasElement): () => void {
     renderer.render(smokeScene, camera);
     renderer.setRenderTarget(rt);
     renderer.render(scene, camera);
+    if (seams.length) {
+      renderSeams(time);
+      renderer.autoClear = false; // draw on top of the main scene, inside the post pass
+      renderer.render(gapScene, gapCam);
+      renderer.autoClear = true;
+    }
     renderer.setRenderTarget(null);
     renderer.render(postScene, postCam);
   };
@@ -460,6 +525,10 @@ export function startScene(canvas: HTMLCanvasElement): () => void {
     gsap.to(state, { p: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 1.2 } });
     ScrollTrigger.create({ start: 0, end: "max", onUpdate: (s) => (state.vel = s.getVelocity()) });
   });
+  if (seams.length) {
+    layoutSeams();
+    ScrollTrigger.addEventListener("refresh", layoutSeams);
+  }
   const tick = (time: number) => {
     if (document.hidden) return;
     state.vel *= 0.9; // velocity decays when scrolling stops
@@ -475,6 +544,7 @@ export function startScene(canvas: HTMLCanvasElement): () => void {
 
   return () => {
     idleCall.kill();
+    ScrollTrigger.removeEventListener("refresh", layoutSeams);
     gsap.ticker.remove(tick);
     ctx.revert();
     removeEventListener("pointermove", onMove);

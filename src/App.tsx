@@ -256,7 +256,7 @@ export default function App() {
           </p>
         </div>
 
-        <section id="intro" className="intro" data-run data-pin="1" data-length="110" aria-labelledby="intro-name">
+        <section id="intro" className="intro" data-run data-pin="1" data-length="80" aria-labelledby="intro-name">
           <h1 id="intro-name" className="name" data-unit="dom">
             <Words text={identity.name.toUpperCase()} />
           </h1>
@@ -268,7 +268,7 @@ export default function App() {
           </p>
         </section>
 
-        <section id="signal" className="signal" data-run data-pin="1" data-length="170" aria-labelledby="signal-title">
+        <section id="signal" className="signal" data-run data-pin="1" data-length="110" aria-labelledby="signal-title">
           <h2 id="signal-title" className="section-title" data-unit="dom">
             <Words text="SIGNAL" />
           </h2>
@@ -323,7 +323,7 @@ export default function App() {
         </section>
 
         {/* STACK: glyphs scatter into an unsorted cloud, then sort into the 7 categories. */}
-        <section id="stack" className="stack" data-run data-pin="1" data-length="150" data-cloud="1" aria-labelledby="stack-title">
+        <section id="stack" className="stack" data-run data-pin="1" data-length="100" data-cloud="1" aria-labelledby="stack-title">
           <h2 id="stack-title" className="section-title" data-unit="dom">
             <Words text="STACK" />
           </h2>
@@ -368,7 +368,7 @@ export default function App() {
 
         {/* CONTACT: the page collapses back into the pangram, which becomes the contact line. */}
         <section
-          id="contact" className="contact" data-run data-pin="1" data-length="160"
+          id="contact" className="contact" data-run data-pin="1" data-length="120"
           data-collapse="1" data-assemble="0.5,0.92" aria-labelledby="contact-title"
         >
           <h2 id="contact-title" className="section-title" data-unit="dom">
