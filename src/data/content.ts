@@ -13,14 +13,51 @@ export type Role = {
   facts: Fact[];
 };
 
+export type Degree = { school: string; degree: string; gpa: string; start: string; end: string; location: string };
+
 const data = resume as unknown as {
   identity: { name: string; title: string; thesis: string; pangram: string };
   roles: Role[];
   projects: { facts: Fact[] }[];
+  education: Degree[];
 };
 
 export const identity = data.identity;
 export const roles = data.roles;
+export const education = data.education;
+
+// Short chip copy per headline fact. Numbers are verbatim from the fact text.
+export const CHIPS: Record<string, string> = {
+  "premier.schema": "697 natural keys recovered",
+  "premier.indexing": "52x heaviest recomputation",
+  "premier.multi-agent": "7 of 7, zero unsupported numbers",
+  "premier.settlement-quality": "1.395x double count caught",
+  "uiuc-ai.cost": "$0.04 per submission",
+  "uiuc-ai.reliability": "317 + 46 checks",
+  "uiuc-ai.grader": "5% divergence goes to a human",
+  "dsrs.agentic-rag": "95% retrieval accuracy",
+  "dsrs.ab-tests": "+50% precision and MRR",
+  "dsrs.ingestion": "7,000+ docs in under 10 seconds",
+  "dsrs.sec": "15,856 SEC documents",
+  "apptware.pipelines": "470,000+ records",
+  "apptware.pix2pix": "17,000+ CT images",
+  "apptware.ivr": "1s to 200ms IVR latency",
+  "apptware.seo": "20+ clients",
+};
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+/** "Aug 2026" to a month index; null means present. */
+export function monthIndex(s: string | null): number {
+  if (!s) {
+    const d = new Date();
+    return d.getFullYear() * 12 + d.getMonth();
+  }
+  const [m, y] = s.split(" ");
+  const i = MONTHS.indexOf(m.slice(0, 3));
+  if (i < 0 || !y) throw new Error(`unparseable date: ${s}`);
+  return Number(y) * 12 + i;
+}
+export const dateRange = (start: string, end: string | null) => `${start} · ${end ?? "Present"}`.toUpperCase();
 
 const facts = new Map<string, Fact>();
 for (const g of [...data.roles, ...data.projects]) for (const f of g.facts) facts.set(f.id, f);

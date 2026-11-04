@@ -300,12 +300,14 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
   mctx.font = `500 12px "Martian Mono Variable", monospace`;
   const labelCharW = mctx.measureText("0").width;
 
-  const sections = [...document.querySelectorAll<HTMLElement>("section[data-length]")];
-  const runs: Run[] = sections.map(buildRun);
+  // A run is any [data-run] element: pinned sections, scrolled role articles, or one-shot lists.
+  const runEls = [...document.querySelectorAll<HTMLElement>("[data-run]:not([data-run='oneshot'])")];
+  const runs: Run[] = runEls.map(buildRun);
 
   function buildRun(section: HTMLElement): Run {
     const sr = section.getBoundingClientRect();
-    const units: Unit[] = [...section.querySelectorAll<HTMLElement>("[data-unit]")].map((el) => {
+    const own = [...section.querySelectorAll<HTMLElement>("[data-unit]")].filter((el) => el.closest("[data-run]") === section);
+    const units: Unit[] = own.map((el) => {
       const targets = measureChars(el, sr.left, sr.top);
       const n = targets.length;
       const glyphs: Glyph[] = targets.map((t, i) => ({
@@ -366,7 +368,9 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
         }
       }
     }
-    boxes.push({ kind: "section", label: label(section), at: SECTION_BOX_AT, ...rel(sr) });
+    if (section.tagName === "SECTION" || section.tagName === "ARTICLE") {
+      boxes.push({ kind: "section", label: label(section), at: SECTION_BOX_AT, ...rel(sr) });
+    }
     if (import.meta.env.DEV) {
       for (const b of boxes) {
         if ((b.kind === "section" || b.kind === "heading") && (b.h % 1 || b.docY % 1)) {
@@ -407,7 +411,7 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
   };
   svg.replaceChildren();
   svg.setAttribute("viewBox", `0 0 ${vw} ${vh}`);
-  const svgPool: SvgBox[] = Array.from({ length: MAX_LIVE_BOXES + sections.length + 2 }, () => {
+  const svgPool: SvgBox[] = Array.from({ length: MAX_LIVE_BOXES + runEls.length + 2 }, () => {
     const root = mk("g", "ibox", svg);
     root.style.visibility = "hidden";
     const dims = mk("g", "ibox-dims", root);
@@ -684,27 +688,70 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
     schedule();
 
     for (const r of runs) {
+      const pin = !mobile && r.section.dataset.pin === "1";
       gsap.to(r, {
         p: 1,
         ease: "none",
         onUpdate: markDirty,
         scrollTrigger: {
           trigger: r.section,
-          start: mobile ? "top 85%" : "top top",
-          end: mobile ? "bottom 45%" : `+=${r.section.dataset.length}%`,
-          pin: !mobile,
+          start: pin ? "top top" : "top 85%",
+          end: pin ? `+=${r.section.dataset.length}%` : "top 30%",
+          pin,
           scrub: 0.6,
           onRefresh: markDirty,
         },
       });
     }
+
+    // WORK lanes: bars draw left to right as the section enters; the role in view lights its bar.
+    const bars = gsap.utils.toArray<HTMLElement>(".lane-bar");
+    if (bars.length && !mobile) {
+      gsap.fromTo(bars, { scaleX: 0 }, {
+        scaleX: 1, ease: "none", stagger: 0.08, transformOrigin: "0 50%",
+        scrollTrigger: { trigger: "#work", start: "top 75%", end: "top 15%", scrub: 0.6 },
+      });
+      for (const a of gsap.utils.toArray<HTMLElement>("article[data-role]")) {
+        ScrollTrigger.create({
+          trigger: a, start: "top 55%", end: "bottom 55%",
+          toggleClass: { targets: `.lane-bar[data-role="${a.dataset.role}"]`, className: "is-active" },
+        });
+      }
+    }
   });
+
+  // "Full log": opening a <details> assembles its list once, on a short timer instead of scroll.
+  const oneShots = new Map<HTMLElement, { run: Run; tween: gsap.core.Tween }>();
+  const onToggle = (e: Event) => {
+    const d = e.target;
+    if (!(d instanceof HTMLDetailsElement)) return;
+    const list = d.querySelector<HTMLElement>("[data-run='oneshot']");
+    if (!list) return;
+    const prev = oneShots.get(list);
+    if (prev) {
+      prev.tween.kill();
+      runs.splice(runs.indexOf(prev.run), 1);
+      oneShots.delete(list);
+    }
+    const units = [...list.querySelectorAll<HTMLElement>("[data-unit]")];
+    if (!d.open || mobile) {
+      units.forEach((u) => (u.style.opacity = d.open ? "1" : ""));
+      markDirty();
+      return;
+    }
+    const run = buildRun(list);
+    runs.push(run);
+    oneShots.set(list, { run, tween: gsap.to(run, { p: 1, duration: 1.4, ease: "none", onUpdate: markDirty }) });
+  };
+  document.addEventListener("toggle", onToggle, true); // toggle does not bubble; capture catches it
 
   gsap.ticker.add(render);
   ScrollTrigger.refresh();
 
   return () => {
     gsap.ticker.remove(render);
+    document.removeEventListener("toggle", onToggle, true);
+    oneShots.forEach(({ tween }) => tween.kill());
     ctx.revert();
     clones.forEach((c) => c.remove());
     svg.replaceChildren();
