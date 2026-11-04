@@ -16,7 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
  */
 
 const INK = "#E4E7EA";
-const BG = [0x25 / 255, 0x25 / 255, 0x25 / 255];
+const BG = [0x10 / 255, 0x10 / 255, 0x10 / 255]; // matches --bg in styles.css
 
 const NOISE = /* glsl */ `
   vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}

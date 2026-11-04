@@ -1,7 +1,7 @@
 /* Tokens: see DESIGN.md. Every size is a whole px so inspector labels read true. */
 :root {
-  --bg: #252525;
-  --surface: #2e2e2e;
+  --bg: #101010;
+  --surface: #1a1a1a;
   --text: #e4e7ea;
   --text-muted: #a3abb2;
   --accent-purple: #6930c3;
@@ -129,8 +129,8 @@ main { position: relative; z-index: 2; }
 /* Darker backdrop: hides the 3D field and centered pool behind long-form reading. */
 .work {
   padding: 128px var(--gutter) 96px;
-  background: #0e0e0e;
-  box-shadow: 0 0 120px 60px #0e0e0e;
+  background: var(--bg);
+  box-shadow: 0 0 120px 60px var(--bg);
 }
 .work > .section-title { margin-bottom: 64px; }
 .work-grid { display: grid; grid-template-columns: 456px 1fr; gap: 64px; align-items: start; }

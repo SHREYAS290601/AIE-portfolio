@@ -28,7 +28,7 @@
 
 ## Color
 - **Approach:** restrained. Neutrals carry text; accents carry instrumentation.
-- `--bg #252525`, `--surface #2E2E2E`.
+- `--bg #101010`, `--surface #1A1A1A` (darkened from #252525 at the user's request, 2026-11-03).
 - `--text #E4E7EA` and `--text-muted #A3ABB2` for all copy (contrast verified in code, both above 4.5:1). Body copy never uses accents.
 - `--accent-cyan #64DFDF`: inspector strokes, links, heading accents.
 - `--accent-mint #80FFDB`: label chips (with `#252525` text), focus ring.
