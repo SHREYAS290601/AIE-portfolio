@@ -1,0 +1,1514 @@
+{
+  "_note": "Canonical merged resume. 'sources' = every rendition containing the fact; 'details' = sub-claims only some renditions carry. clearance 'needs-clearance' renders as a placeholder until approved. Contact status 'unconfirmed' is not rendered.",
+  "sources": [
+    "Shreyas_Kulkarni_Resume (66).pdf",
+    "Shreyas_Kulkarni_Resume (67).pdf",
+    "Shreyas_Kulkarni_Resume (68).pdf",
+    "Shreyas_Kulkarni_Resume (69).pdf",
+    "Shreyas_Kulkarni_Resume (70).pdf",
+    "Shreyas_Kulkarni_Resume (71).pdf",
+    "Shreyas_Kulkarni_Resume (72).pdf",
+    "Shreyas_Kulkarni_Resume (73).pdf",
+    "Shreyas_Kulkarni_Resume (74).pdf",
+    "Shreyas_Kulkarni_Resume (75).pdf",
+    "Shreyas_Kulkarni_Resume (76).pdf",
+    "Shreyas_Kulkarni_Resume (77).pdf",
+    "Shreyas_Kulkarni_Resume (78).pdf",
+    "Shreyas_Kulkarni_Resume (79).pdf",
+    "Shreyas_Kulkarni_Resume (80).pdf",
+    "Shreyas_Kulkarni_Resume (81).pdf"
+  ],
+  "identity": {
+    "name": "Shreyas Kulkarni",
+    "legalName": "Shreyas Sachin Kulkarni",
+    "title": "AI Data Engineer",
+    "thesis": "I turn undocumented, unreliable data into verified systems, then build AI on top that can't fake the numbers.",
+    "pangram": "Quick, fix the hazy JSON dump; verbose logs win.",
+    "contact": {
+      "email": {
+        "value": "ssk16@illinois.edu",
+        "status": "unconfirmed",
+        "sources": [
+          "Shreyas_Kulkarni_Resume (66).pdf",
+          "Shreyas_Kulkarni_Resume (67).pdf",
+          "Shreyas_Kulkarni_Resume (68).pdf",
+          "Shreyas_Kulkarni_Resume (69).pdf",
+          "Shreyas_Kulkarni_Resume (70).pdf",
+          "Shreyas_Kulkarni_Resume (71).pdf",
+          "Shreyas_Kulkarni_Resume (72).pdf",
+          "Shreyas_Kulkarni_Resume (73).pdf",
+          "Shreyas_Kulkarni_Resume (74).pdf",
+          "Shreyas_Kulkarni_Resume (75).pdf",
+          "Shreyas_Kulkarni_Resume (76).pdf",
+          "Shreyas_Kulkarni_Resume (77).pdf",
+          "Shreyas_Kulkarni_Resume (78).pdf",
+          "Shreyas_Kulkarni_Resume (79).pdf",
+          "Shreyas_Kulkarni_Resume (80).pdf",
+          "Shreyas_Kulkarni_Resume (81).pdf"
+        ]
+      },
+      "linkedin": {
+        "value": "https://www.linkedin.com/in/shreyaskulkarni29/",
+        "status": "unconfirmed",
+        "sources": [
+          "Shreyas_Kulkarni_Resume (66).pdf",
+          "Shreyas_Kulkarni_Resume (67).pdf",
+          "Shreyas_Kulkarni_Resume (68).pdf",
+          "Shreyas_Kulkarni_Resume (69).pdf",
+          "Shreyas_Kulkarni_Resume (70).pdf",
+          "Shreyas_Kulkarni_Resume (71).pdf",
+          "Shreyas_Kulkarni_Resume (72).pdf",
+          "Shreyas_Kulkarni_Resume (73).pdf",
+          "Shreyas_Kulkarni_Resume (74).pdf",
+          "Shreyas_Kulkarni_Resume (75).pdf",
+          "Shreyas_Kulkarni_Resume (76).pdf",
+          "Shreyas_Kulkarni_Resume (77).pdf",
+          "Shreyas_Kulkarni_Resume (78).pdf",
+          "Shreyas_Kulkarni_Resume (79).pdf",
+          "Shreyas_Kulkarni_Resume (80).pdf",
+          "Shreyas_Kulkarni_Resume (81).pdf"
+        ]
+      },
+      "portfolio": {
+        "value": "https://shreyas290601.github.io/AIE-portfolio/",
+        "status": "unconfirmed",
+        "sources": [
+          "Shreyas_Kulkarni_Resume (66).pdf",
+          "Shreyas_Kulkarni_Resume (67).pdf",
+          "Shreyas_Kulkarni_Resume (68).pdf",
+          "Shreyas_Kulkarni_Resume (69).pdf",
+          "Shreyas_Kulkarni_Resume (70).pdf",
+          "Shreyas_Kulkarni_Resume (71).pdf",
+          "Shreyas_Kulkarni_Resume (72).pdf",
+          "Shreyas_Kulkarni_Resume (73).pdf",
+          "Shreyas_Kulkarni_Resume (74).pdf",
+          "Shreyas_Kulkarni_Resume (75).pdf",
+          "Shreyas_Kulkarni_Resume (76).pdf",
+          "Shreyas_Kulkarni_Resume (77).pdf",
+          "Shreyas_Kulkarni_Resume (78).pdf",
+          "Shreyas_Kulkarni_Resume (79).pdf",
+          "Shreyas_Kulkarni_Resume (80).pdf",
+          "Shreyas_Kulkarni_Resume (81).pdf"
+        ]
+      }
+    }
+  },
+  "education": [
+    {
+      "school": "University of Illinois Urbana-Champaign",
+      "degree": "M.S. Information Science",
+      "gpa": "3.93",
+      "start": "Aug 2024",
+      "end": "May 2026",
+      "location": "Champaign, IL",
+      "sources": [
+        "Shreyas_Kulkarni_Resume (66).pdf",
+        "Shreyas_Kulkarni_Resume (67).pdf",
+        "Shreyas_Kulkarni_Resume (68).pdf",
+        "Shreyas_Kulkarni_Resume (69).pdf",
+        "Shreyas_Kulkarni_Resume (70).pdf",
+        "Shreyas_Kulkarni_Resume (71).pdf",
+        "Shreyas_Kulkarni_Resume (72).pdf",
+        "Shreyas_Kulkarni_Resume (73).pdf",
+        "Shreyas_Kulkarni_Resume (74).pdf",
+        "Shreyas_Kulkarni_Resume (75).pdf",
+        "Shreyas_Kulkarni_Resume (76).pdf",
+        "Shreyas_Kulkarni_Resume (77).pdf",
+        "Shreyas_Kulkarni_Resume (78).pdf",
+        "Shreyas_Kulkarni_Resume (79).pdf",
+        "Shreyas_Kulkarni_Resume (80).pdf",
+        "Shreyas_Kulkarni_Resume (81).pdf"
+      ]
+    },
+    {
+      "school": "Savitribai Phule Pune University",
+      "degree": "B.E. Computer Engineering (minor in Data Science)",
+      "gpa": "3.86",
+      "start": "Aug 2019",
+      "end": "Jul 2023",
+      "location": "Pune, MH",
+      "sources": [
+        "Shreyas_Kulkarni_Resume (66).pdf",
+        "Shreyas_Kulkarni_Resume (67).pdf",
+        "Shreyas_Kulkarni_Resume (68).pdf",
+        "Shreyas_Kulkarni_Resume (69).pdf",
+        "Shreyas_Kulkarni_Resume (70).pdf",
+        "Shreyas_Kulkarni_Resume (71).pdf",
+        "Shreyas_Kulkarni_Resume (72).pdf",
+        "Shreyas_Kulkarni_Resume (73).pdf",
+        "Shreyas_Kulkarni_Resume (74).pdf",
+        "Shreyas_Kulkarni_Resume (75).pdf",
+        "Shreyas_Kulkarni_Resume (76).pdf",
+        "Shreyas_Kulkarni_Resume (77).pdf",
+        "Shreyas_Kulkarni_Resume (78).pdf",
+        "Shreyas_Kulkarni_Resume (79).pdf",
+        "Shreyas_Kulkarni_Resume (80).pdf",
+        "Shreyas_Kulkarni_Resume (81).pdf"
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "id": "premier",
+      "org": "Premier Cooperative",
+      "title": "AI Data Engineer",
+      "start": "Aug 2026",
+      "end": null,
+      "story": "Found the structure in a database with no foreign keys, caught the numbers it got wrong, then built analytics and local AI on top.",
+      "headline": [
+        "premier.schema",
+        "premier.indexing",
+        "premier.multi-agent",
+        "premier.settlement-quality"
+      ],
+      "facts": [
+        {
+          "id": "premier.schema",
+          "text": "Reverse-engineered a vendor SQL Server database (Agvance) with 925 tables, 14,539 columns, and zero foreign keys. Recovered 697 natural keys, audited 128 Agvance API operations, and produced a 10-report evidence base, inferring relationships across about 85% of tables.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf"
+          ],
+          "details": [
+            {
+              "claim": "128 API operations audited",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (67).pdf",
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf"
+              ]
+            },
+            {
+              "claim": "10-report evidence base",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf"
+              ]
+            },
+            {
+              "claim": "about 85% of tables",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (67).pdf",
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "premier.settlement-quality",
+          "text": "Found a settlement field that double-counted bushels by 1.395x, a business rule hiding 967,647 bu of open corn, and zero prices in 114,040 of 178,570 settlement rows. Fixed the zero prices with a settlement-line price fallback.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": [
+            {
+              "claim": "1.395x double count",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (67).pdf",
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (76).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (79).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "967,647 bu",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (67).pdf",
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (70).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (76).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (79).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "settlement-line fix",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (67).pdf",
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (70).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (76).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "premier.star-schema",
+          "text": "Designed a star-schema analytics database (fact, dimension, and DECIMAL snapshot tables) with T-SQL ETL on SQL Server Agent: nightly rebuilds, 15-minute conditional refreshes, and reconciliation against fresh recomputation. Unchanged growers take about 8 ms of refresh work versus 360 ms for a full recomputation.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": [
+            {
+              "claim": "8 ms vs 360 ms",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (70).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (76).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (79).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "DECIMAL snapshot tables",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (67).pdf",
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (76).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (79).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "least-privilege access",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "premier.indexing",
+          "text": "Cut the heaviest grower's recomputation from 14.3 s to 0.27 s (52x) with read-only indexes and concurrent-request deduplication.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf"
+          ],
+          "details": [
+            {
+              "claim": "read-only indexes",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (79).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            },
+            {
+              "claim": "concurrent-request deduplication",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (79).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "premier.load-test",
+          "text": "Load-tested 7 routes across 10 growers and 10 rounds with zero connection-pool timeouts; p50 about 2.1 s and p95 3.2 to 4.2 s at 10 concurrent requests.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf"
+          ],
+          "details": [
+            {
+              "claim": "7 routes, 10 growers, 10 rounds",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            },
+            {
+              "claim": "zero connection-pool timeouts",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (79).pdf"
+              ]
+            },
+            {
+              "claim": "p50 / p95 latency",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "premier.backend",
+          "text": "Built an async Python/FastAPI backend with 14 routes across 8 grower insight tiers, integrating Agvance SQL Server, Agvance REST, Barchart, and farmdoc. Pydantic, SQLAlchemy, ContextVar request isolation, standardized error handling, and 196 offline pytest checks run via pre-commit.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": [
+            {
+              "claim": "Barchart + farmdoc sources",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (67).pdf",
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (76).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            },
+            {
+              "claim": "ContextVar isolation",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "pre-commit",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "SQLAlchemy",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            },
+            {
+              "claim": "pyodbc + httpx",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (74).pdf"
+              ]
+            },
+            {
+              "claim": "Python 3.14",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "premier.segmentation",
+          "text": "Compared k-means, GMM, hierarchical clustering, DBSCAN, and HDBSCAN for grower peer segmentation, then built a selling-behavior model combining GMM, HMM, and particle filtering, tracked in MLflow.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": []
+        },
+        {
+          "id": "premier.multi-agent",
+          "text": "Built and benchmarked a local multi-agent system on DGX Spark (Gemma 4 orchestrator, specialized sub-agents, llama.cpp, OpenAI Agents SDK) answering questions against live APIs: 7 of 7 correct with zero unsupported numerical outputs, and 45% faster inference via speculative decoding (DFlash and MTP).",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf"
+          ],
+          "details": [
+            {
+              "claim": "DGX Spark",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            },
+            {
+              "claim": "DFlash + MTP",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            },
+            {
+              "claim": "live APIs",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (70).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "premier.bedrock",
+          "text": "Generated grower-specific summaries with Claude Sonnet 5.5 on AWS Bedrock, with prompt-hash caching.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf"
+          ],
+          "details": []
+        }
+      ]
+    },
+    {
+      "id": "uiuc-ai",
+      "org": "University of Illinois",
+      "title": "AI Solutions Developer",
+      "start": "Jul 2026",
+      "end": null,
+      "story": "An LLM grader that's cheap, grades twice, and never releases a grade without a human.",
+      "headline": [
+        "uiuc-ai.cost",
+        "uiuc-ai.reliability",
+        "uiuc-ai.grader"
+      ],
+      "facts": [
+        {
+          "id": "uiuc-ai.grader",
+          "text": "Built an LLM grading system for finance coursework: Canvas REST API ingestion, DOCX, PDF, and text extraction, JSON rubrics and solution keys, and Claude on Azure AI Foundry with structured tool calls. Every submission is graded twice; divergence above 5% or a grade-boundary result goes to human review.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": [
+            {
+              "claim": "Canvas REST API",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (67).pdf",
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (76).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            },
+            {
+              "claim": "solution keys",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf"
+              ]
+            },
+            {
+              "claim": "structured tool calls",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            },
+            {
+              "claim": "grade-boundary review",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf",
+                "Shreyas_Kulkarni_Resume (79).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "uiuc-ai.release-gate",
+          "text": "Grades post hidden and need a separate, human-approved release step.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": [
+            {
+              "claim": "hidden posting + separate approval",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (72).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "uiuc-ai.reliability",
+          "text": "317 correctness checks and 46 fault-injection checks, covering 240 concurrent operations, 23 hostile queue messages, and injected HTTP 429 errors. Includes prompt-injection detection, score clamping, and missing-criteria and solution-key leakage checks.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": [
+            {
+              "claim": "240 concurrent operations",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (76).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "23 hostile messages",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "injected 429s",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            },
+            {
+              "claim": "score clamping",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf",
+                "Shreyas_Kulkarni_Resume (79).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "leakage checks",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (67).pdf",
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (70).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf",
+                "Shreyas_Kulkarni_Resume (79).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "uiuc-ai.cost",
+          "text": "Traced tokens, cache usage, latency, and retries across 860 submissions in two full-module runs: $0.04 per submission ($35 total), with prompt caching serving about 75% of token volume. TPM-based capacity planning on Azure AI Foundry.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": [
+            {
+              "claim": "two full-module runs",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (70).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (76).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (79).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "TPM capacity planning",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "uiuc-ai.infra",
+          "text": "Deployed on Azure with Bicep, Container Apps Jobs, App Service, and a FastAPI review console, with Blob Storage as the system of record and queue-based processing. Managed identity throughout (no shared keys or SAS links) and GitHub Actions OIDC deployments.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": [
+            {
+              "claim": "Bicep",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (70).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (76).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (79).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "Blob as system of record",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (68).pdf"
+              ]
+            },
+            {
+              "claim": "queues",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (72).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (76).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (79).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "no shared keys / SAS",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (68).pdf"
+              ]
+            },
+            {
+              "claim": "GitHub Actions OIDC",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (69).pdf",
+                "Shreyas_Kulkarni_Resume (70).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dsrs",
+      "org": "Data Science Research Services (DSRS), University of Illinois",
+      "title": "Data Scientist",
+      "start": "Jul 2025",
+      "end": "Sep 2026",
+      "story": "Retrieval, benchmarks, and pipelines for research: measured, not guessed.",
+      "headline": [
+        "dsrs.agentic-rag",
+        "dsrs.ab-tests",
+        "dsrs.ingestion",
+        "dsrs.sec"
+      ],
+      "facts": [
+        {
+          "id": "dsrs.agentic-rag",
+          "text": "Built agentic RAG with LangGraph and Qwen-3-32B, reaching 95% retrieval accuracy, with reusable Claude Code/Codex skills integrated through FastAPI.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf"
+          ],
+          "details": [
+            {
+              "claim": "Claude Code/Codex skills",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dsrs.ab-tests",
+          "text": "Ran statistical A/B tests comparing custom scoring, hybrid search, and semantic chunking, improving retrieval precision and Mean Reciprocal Rank (MRR) by 50%.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": []
+        },
+        {
+          "id": "dsrs.embedding-bench",
+          "text": "Built a model-agnostic embedding benchmark on Supabase Postgres with pgvector, per-model vector columns, and cosine-search RPCs, comparing Qwen3, EmbeddingGemma, and Jina v4 (768-2048 dimensions) on BEIR SciFact with nDCG@10, Recall@10, and rank overlap.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": [
+            {
+              "claim": "BEIR SciFact",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "per-model vector columns",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (74).pdf"
+              ]
+            },
+            {
+              "claim": "768-2048 dims",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (70).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (74).pdf",
+                "Shreyas_Kulkarni_Resume (80).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dsrs.routing-bench",
+          "text": "Built a 10K+ row workflow-routing benchmark with rule-based labels, ambiguity modeling, group-based validation, and Greedy/Viterbi/SMC decoding. Sentence-embedding Logistic Regression reached 0.641 macro F1 and 0.906 top-3 accuracy on unseen seed groups.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": [
+            {
+              "claim": "Greedy/Viterbi/SMC",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "ambiguity modeling",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (70).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            },
+            {
+              "claim": "unseen seed groups",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (70).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf",
+                "Shreyas_Kulkarni_Resume (81).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dsrs.sec",
+          "text": "Extracted 70+ variables from 15,856 SEC enforcement documents (2010-2025), using DeepSeek-V4 Flash for indicator coding and Regex for violation detection across Administrative Proceedings and Litigation Releases.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf"
+          ],
+          "details": [
+            {
+              "claim": "Administrative Proceedings / Litigation Releases",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (68).pdf",
+                "Shreyas_Kulkarni_Resume (71).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (77).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dsrs.ingestion",
+          "text": "Moved 7,000+ documents from MongoDB into PostgreSQL vector stores in under 10 seconds with 100% data integrity, using multiprocessing and Pydantic schema validation.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": []
+        },
+        {
+          "id": "dsrs.ticketmaster",
+          "text": "Built async ETL on Azure Container Instances over paginated Ticketmaster API data: 1,000+ event records per 1.5s, with a 60%+ latency improvement.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf"
+          ],
+          "details": []
+        },
+        {
+          "id": "dsrs.knowledge-base",
+          "text": "Built knowledge-base ingestion from GitHub and Asana, reducing processing latency by 90%.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf"
+          ],
+          "details": []
+        },
+        {
+          "id": "dsrs.tableau",
+          "text": "Built Tableau dashboards and reporting covering 8,700+ operational and compliance events.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf"
+          ],
+          "details": []
+        },
+        {
+          "id": "dsrs.soybean",
+          "text": "Soybean disease detection on 10,000+ images in TensorFlow: GLCM, FFT, and Sobel features, ConvNeXt and ResNet models, and Grad-CAM interpretation.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf"
+          ],
+          "details": [
+            {
+              "claim": "low-resolution detection",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (78).pdf"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apptware",
+      "org": "Apptware Pvt. Ltd., Pune",
+      "title": "Associate Data Scientist",
+      "start": "Apr 2023",
+      "end": "Jun 2024",
+      "story": "Where it started: pipelines, GANs, fine-tuning, and production inference.",
+      "headline": [
+        "apptware.pipelines",
+        "apptware.pix2pix",
+        "apptware.ivr",
+        "apptware.seo"
+      ],
+      "facts": [
+        {
+          "id": "apptware.pipelines",
+          "text": "Built SQL and PySpark pipelines over 470,000+ records, with Power BI dashboards on Azure.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": []
+        },
+        {
+          "id": "apptware.seo",
+          "text": "Automated SEO analytics for 20+ clients, cutting manual processing by 90%, on a 24/7 AWS extraction service.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": [
+            {
+              "claim": "24/7 wording",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (70).pdf",
+                "Shreyas_Kulkarni_Resume (73).pdf",
+                "Shreyas_Kulkarni_Resume (75).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "apptware.pix2pix",
+          "text": "Trained Pix2Pix GANs in PyTorch on 17,000+ CT images to generate synthetic MRI images.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf"
+          ],
+          "details": [
+            {
+              "claim": "'reducing diagnostic latency' (unquantified)",
+              "sources": [
+                "Shreyas_Kulkarni_Resume (66).pdf",
+                "Shreyas_Kulkarni_Resume (78).pdf"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "apptware.finetune",
+          "text": "Fine-tuned Falcon-7B and LLaMA with LoRA and QLoRA.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf"
+          ],
+          "details": []
+        },
+        {
+          "id": "apptware.ivr",
+          "text": "Deployed Hugging Face speech-to-text on AWS Lambda for IVR, cutting transcription latency by 80% from 1s to 200ms.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (80).pdf"
+          ],
+          "details": []
+        },
+        {
+          "id": "apptware.conversational",
+          "text": "Built conversational analytics with GPT-4, LangChain, Chainlit, and SQL, with function calling across 20+ user-defined functions.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (74).pdf"
+          ],
+          "details": []
+        },
+        {
+          "id": "apptware.ecg",
+          "text": "ECG anomaly models with XGBoost, Isolation Forest, and hierarchical classification.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf"
+          ],
+          "details": []
+        },
+        {
+          "id": "apptware.ocr",
+          "text": "Extracted structured data from technical documents with Azure Computer Vision OCR, reducing processing latency by 40%.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf"
+          ],
+          "details": []
+        },
+        {
+          "id": "apptware.yolo",
+          "text": "Led YOLO object detection work, with annotation and validation of 18,000+ images for edge-device inference.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": []
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "pantryops",
+      "name": "PantryOps Edge (KitchenOS)",
+      "affiliation": "University of Illinois",
+      "stack": [
+        "FastAPI",
+        "Postgres",
+        "Celery",
+        "Expo React Native"
+      ],
+      "facts": [
+        {
+          "id": "pantryops.pantryops",
+          "text": "Photo-to-pantry grocery app: an RF-DETR, PaddleOCR, and barcode pipeline turns post-shopping photos into editable, provenance-tagged inventory. One ledger service enforces source, confidence, and status on every write, so AI estimates can never overwrite user-confirmed data. 15+ endpoints, 18 models, and 16 agents, built test-first with a WCAG 2.1 AA mobile UI.",
+          "clearance": "public",
+          "sources": [
+            "Shreyas_Kulkarni_Resume (66).pdf",
+            "Shreyas_Kulkarni_Resume (67).pdf",
+            "Shreyas_Kulkarni_Resume (68).pdf",
+            "Shreyas_Kulkarni_Resume (69).pdf",
+            "Shreyas_Kulkarni_Resume (70).pdf",
+            "Shreyas_Kulkarni_Resume (71).pdf",
+            "Shreyas_Kulkarni_Resume (72).pdf",
+            "Shreyas_Kulkarni_Resume (73).pdf",
+            "Shreyas_Kulkarni_Resume (74).pdf",
+            "Shreyas_Kulkarni_Resume (75).pdf",
+            "Shreyas_Kulkarni_Resume (76).pdf",
+            "Shreyas_Kulkarni_Resume (77).pdf",
+            "Shreyas_Kulkarni_Resume (78).pdf",
+            "Shreyas_Kulkarni_Resume (79).pdf",
+            "Shreyas_Kulkarni_Resume (80).pdf",
+            "Shreyas_Kulkarni_Resume (81).pdf"
+          ],
+          "details": []
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "category": "Tools & BI",
+      "items": [
+        "Power BI",
+        "Tableau",
+        "SAP BusinessObjects",
+        "MS Excel",
+        "Linux",
+        "Git",
+        "MongoDB",
+        "VS Code",
+        "RStudio"
+      ],
+      "sources": [
+        "Shreyas_Kulkarni_Resume (66).pdf",
+        "Shreyas_Kulkarni_Resume (67).pdf",
+        "Shreyas_Kulkarni_Resume (68).pdf",
+        "Shreyas_Kulkarni_Resume (69).pdf",
+        "Shreyas_Kulkarni_Resume (70).pdf",
+        "Shreyas_Kulkarni_Resume (71).pdf",
+        "Shreyas_Kulkarni_Resume (72).pdf",
+        "Shreyas_Kulkarni_Resume (73).pdf",
+        "Shreyas_Kulkarni_Resume (74).pdf",
+        "Shreyas_Kulkarni_Resume (75).pdf",
+        "Shreyas_Kulkarni_Resume (76).pdf",
+        "Shreyas_Kulkarni_Resume (77).pdf",
+        "Shreyas_Kulkarni_Resume (78).pdf",
+        "Shreyas_Kulkarni_Resume (79).pdf",
+        "Shreyas_Kulkarni_Resume (80).pdf",
+        "Shreyas_Kulkarni_Resume (81).pdf"
+      ]
+    },
+    {
+      "category": "Frameworks/Libraries",
+      "items": [
+        "PySpark",
+        "NumPy",
+        "Pandas",
+        "Scikit-Learn",
+        "TensorFlow",
+        "PyTorch",
+        "MLflow",
+        "FastAPI",
+        "SQLAlchemy",
+        "pytest",
+        "Folium",
+        "xarray",
+        "GeoPandas",
+        "tidyverse",
+        "ggplot2"
+      ],
+      "sources": [
+        "Shreyas_Kulkarni_Resume (66).pdf",
+        "Shreyas_Kulkarni_Resume (67).pdf",
+        "Shreyas_Kulkarni_Resume (68).pdf",
+        "Shreyas_Kulkarni_Resume (69).pdf",
+        "Shreyas_Kulkarni_Resume (70).pdf",
+        "Shreyas_Kulkarni_Resume (71).pdf",
+        "Shreyas_Kulkarni_Resume (72).pdf",
+        "Shreyas_Kulkarni_Resume (73).pdf",
+        "Shreyas_Kulkarni_Resume (74).pdf",
+        "Shreyas_Kulkarni_Resume (75).pdf",
+        "Shreyas_Kulkarni_Resume (76).pdf",
+        "Shreyas_Kulkarni_Resume (77).pdf",
+        "Shreyas_Kulkarni_Resume (78).pdf",
+        "Shreyas_Kulkarni_Resume (79).pdf",
+        "Shreyas_Kulkarni_Resume (80).pdf",
+        "Shreyas_Kulkarni_Resume (81).pdf"
+      ]
+    },
+    {
+      "category": "Languages",
+      "items": [
+        "Python (Advanced Scripting, Pydantic)",
+        "SQL (T-SQL)",
+        "R",
+        "JavaScript",
+        "MQL",
+        "Regex",
+        "BigQuery ML"
+      ],
+      "sources": [
+        "Shreyas_Kulkarni_Resume (66).pdf",
+        "Shreyas_Kulkarni_Resume (67).pdf",
+        "Shreyas_Kulkarni_Resume (68).pdf",
+        "Shreyas_Kulkarni_Resume (69).pdf",
+        "Shreyas_Kulkarni_Resume (70).pdf",
+        "Shreyas_Kulkarni_Resume (71).pdf",
+        "Shreyas_Kulkarni_Resume (72).pdf",
+        "Shreyas_Kulkarni_Resume (73).pdf",
+        "Shreyas_Kulkarni_Resume (74).pdf",
+        "Shreyas_Kulkarni_Resume (75).pdf",
+        "Shreyas_Kulkarni_Resume (76).pdf",
+        "Shreyas_Kulkarni_Resume (77).pdf",
+        "Shreyas_Kulkarni_Resume (78).pdf",
+        "Shreyas_Kulkarni_Resume (79).pdf",
+        "Shreyas_Kulkarni_Resume (80).pdf",
+        "Shreyas_Kulkarni_Resume (81).pdf"
+      ]
+    },
+    {
+      "category": "AI & Agent Engineering",
+      "items": [
+        "LangChain",
+        "LangGraph (Agentic Workflows)",
+        "RAG",
+        "LLMs (GPT-6/5, Claude, Gemma)",
+        "Vector Databases (PGVector, Qdrant, Pinecone, Weaviate)",
+        "AutoGen",
+        "OpenAI Agents SDK",
+        "llama.cpp",
+        "Prompt Engineering",
+        "Codex",
+        "Cursor",
+        "Claude Code"
+      ],
+      "sources": [
+        "Shreyas_Kulkarni_Resume (66).pdf",
+        "Shreyas_Kulkarni_Resume (67).pdf",
+        "Shreyas_Kulkarni_Resume (68).pdf",
+        "Shreyas_Kulkarni_Resume (69).pdf",
+        "Shreyas_Kulkarni_Resume (70).pdf",
+        "Shreyas_Kulkarni_Resume (71).pdf",
+        "Shreyas_Kulkarni_Resume (72).pdf",
+        "Shreyas_Kulkarni_Resume (73).pdf",
+        "Shreyas_Kulkarni_Resume (74).pdf",
+        "Shreyas_Kulkarni_Resume (75).pdf",
+        "Shreyas_Kulkarni_Resume (76).pdf",
+        "Shreyas_Kulkarni_Resume (77).pdf",
+        "Shreyas_Kulkarni_Resume (78).pdf",
+        "Shreyas_Kulkarni_Resume (79).pdf",
+        "Shreyas_Kulkarni_Resume (80).pdf",
+        "Shreyas_Kulkarni_Resume (81).pdf"
+      ]
+    },
+    {
+      "category": "ML & Deep Learning",
+      "items": [
+        "YOLO",
+        "Transfer Learning",
+        "Pix2Pix (GANs)",
+        "XGBoost",
+        "Random Forest",
+        "Clustering (k-means, GMM, DBSCAN)"
+      ],
+      "sources": [
+        "Shreyas_Kulkarni_Resume (66).pdf",
+        "Shreyas_Kulkarni_Resume (67).pdf",
+        "Shreyas_Kulkarni_Resume (68).pdf",
+        "Shreyas_Kulkarni_Resume (69).pdf",
+        "Shreyas_Kulkarni_Resume (70).pdf",
+        "Shreyas_Kulkarni_Resume (71).pdf",
+        "Shreyas_Kulkarni_Resume (72).pdf",
+        "Shreyas_Kulkarni_Resume (73).pdf",
+        "Shreyas_Kulkarni_Resume (74).pdf",
+        "Shreyas_Kulkarni_Resume (75).pdf",
+        "Shreyas_Kulkarni_Resume (76).pdf",
+        "Shreyas_Kulkarni_Resume (77).pdf",
+        "Shreyas_Kulkarni_Resume (78).pdf",
+        "Shreyas_Kulkarni_Resume (79).pdf",
+        "Shreyas_Kulkarni_Resume (80).pdf",
+        "Shreyas_Kulkarni_Resume (81).pdf"
+      ]
+    },
+    {
+      "category": "Data Engineering & Cloud",
+      "items": [
+        "Python",
+        "Docker",
+        "Kubernetes",
+        "ETL Pipelines",
+        "SQL Server (SQL Server Agent)",
+        "Snowflake",
+        "Databricks"
+      ],
+      "sources": [
+        "Shreyas_Kulkarni_Resume (66).pdf",
+        "Shreyas_Kulkarni_Resume (67).pdf",
+        "Shreyas_Kulkarni_Resume (68).pdf",
+        "Shreyas_Kulkarni_Resume (69).pdf",
+        "Shreyas_Kulkarni_Resume (70).pdf",
+        "Shreyas_Kulkarni_Resume (71).pdf",
+        "Shreyas_Kulkarni_Resume (72).pdf",
+        "Shreyas_Kulkarni_Resume (73).pdf",
+        "Shreyas_Kulkarni_Resume (74).pdf",
+        "Shreyas_Kulkarni_Resume (75).pdf",
+        "Shreyas_Kulkarni_Resume (76).pdf",
+        "Shreyas_Kulkarni_Resume (77).pdf",
+        "Shreyas_Kulkarni_Resume (78).pdf",
+        "Shreyas_Kulkarni_Resume (79).pdf",
+        "Shreyas_Kulkarni_Resume (80).pdf",
+        "Shreyas_Kulkarni_Resume (81).pdf"
+      ]
+    },
+    {
+      "category": "Cloud & DevOps",
+      "items": [
+        "Azure (AI Foundry, Container Apps, Container Instances, Delta Lake)",
+        "AWS (SageMaker, Bedrock, S3, RDS, EC2)",
+        "GCP (Vertex AI, Gemini Enterprise)"
+      ],
+      "sources": [
+        "Shreyas_Kulkarni_Resume (66).pdf",
+        "Shreyas_Kulkarni_Resume (67).pdf",
+        "Shreyas_Kulkarni_Resume (68).pdf",
+        "Shreyas_Kulkarni_Resume (69).pdf",
+        "Shreyas_Kulkarni_Resume (70).pdf",
+        "Shreyas_Kulkarni_Resume (71).pdf",
+        "Shreyas_Kulkarni_Resume (72).pdf",
+        "Shreyas_Kulkarni_Resume (73).pdf",
+        "Shreyas_Kulkarni_Resume (74).pdf",
+        "Shreyas_Kulkarni_Resume (75).pdf",
+        "Shreyas_Kulkarni_Resume (76).pdf",
+        "Shreyas_Kulkarni_Resume (77).pdf",
+        "Shreyas_Kulkarni_Resume (78).pdf",
+        "Shreyas_Kulkarni_Resume (79).pdf",
+        "Shreyas_Kulkarni_Resume (80).pdf",
+        "Shreyas_Kulkarni_Resume (81).pdf"
+      ]
+    }
+  ]
+}

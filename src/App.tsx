@@ -1,63 +1,129 @@
-import { useEffect, useState } from "react";
-import Terminal from "./terminal/Terminal";
+import { useEffect } from "react";
+import { identity, SIGNAL } from "./data/content";
+import { startEngine } from "./engine";
 
-const BOOT_LINES = [
-  "BIOS v2.9.6 — PHOSPHOR OK",
-  "memory check ........ 640K (should be enough for anybody)",
-  "mounting /home/shreyas ........ done",
-  "loading resume.sys ........ done",
-  "starting portfolio shell ........ ok",
-];
-
-function Boot({ onDone }: { onDone: () => void }) {
-  const [shown, setShown] = useState(0);
-
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      onDone();
-      return;
-    }
-    if (shown >= BOOT_LINES.length) {
-      const t = setTimeout(onDone, 350);
-      return () => clearTimeout(t);
-    }
-    const t = setTimeout(() => setShown((s) => s + 1), 220);
-    return () => clearTimeout(t);
-  }, [shown, onDone]);
-
+// Words wrapped in spans: word boxes on desktop, word-level assembly on mobile.
+function Words({ text }: { text: string }) {
+  const words = text.split(" ");
   return (
-    <div className="term-output" aria-hidden="true">
-      {BOOT_LINES.slice(0, shown).map((l) => (
-        <p key={l} className="dim boot-line">{l}</p>
+    <>
+      {words.map((w, i) => (
+        <span key={i}>
+          <span className="w">{w}</span>
+          {i < words.length - 1 ? " " : null}
+        </span>
       ))}
-    </div>
+    </>
+  );
+}
+
+function PoolChars({ text }: { text: string }) {
+  return (
+    <>
+      {[...text].map((c, i) => (
+        <span key={i} className="pc" data-c={c}>
+          {c}
+        </span>
+      ))}
+    </>
   );
 }
 
 export default function App() {
-  const [booted, setBooted] = useState(false);
-
+  useEffect(() => startEngine(), []);
   useEffect(() => {
-    const skip = () => setBooted(true);
-    window.addEventListener("keydown", skip, { once: true });
-    window.addEventListener("pointerdown", skip, { once: true });
+    // three.js loads after first paint so it never competes with LCP.
+    let stop: (() => void) | undefined;
+    let cancelled = false;
+    const canvas = document.querySelector<HTMLCanvasElement>("canvas.webgl");
+    import("./scene3d")
+      .then(({ startScene }) => {
+        if (!cancelled && canvas) stop = startScene(canvas);
+      })
+      .catch((err) => console.error("3D layer failed to load", err)); // decorative: page works without it
     return () => {
-      window.removeEventListener("keydown", skip);
-      window.removeEventListener("pointerdown", skip);
+      cancelled = true;
+      stop?.();
     };
   }, []);
+  const pangram = identity.pangram;
 
   return (
-    <div className="crt">
-      <div className="crt-screen">
-        <div className="titlebar">
-          <span className="dots" aria-hidden="true">● ● ●</span>
-          <span className="title">shreyas@portfolio: ~ — 80×24</span>
-          <span aria-hidden="true">tty1</span>
-        </div>
-        {booted ? <Terminal /> : <Boot onDone={() => setBooted(true)} />}
+    <>
+      <a className="skip" href="#intro">
+        Skip to content
+      </a>
+
+      {/* Decorative layers: 3D field, the pool, its docked twin, particle canvas, flight layer, inspector, HUD. */}
+      <canvas className="webgl" aria-hidden="true" />
+      <div className="pool" aria-hidden="true">
+        <PoolChars text={pangram} />
+        <span className="pool-glitch">{pangram}</span>
       </div>
-    </div>
+      <div className="pool-twin" aria-hidden="true">
+        <PoolChars text={pangram} />
+      </div>
+      <canvas className="stage" aria-hidden="true" />
+      <div className="flight" aria-hidden="true" />
+      <svg className="inspector" aria-hidden="true" />
+      <div className="hud" aria-hidden="true">
+        glyphs <span id="hud-glyphs">26</span> · nodes <span id="hud-nodes">0</span>
+      </div>
+      <div className="scanlines" aria-hidden="true" />
+      <div className="glitch-screen" aria-hidden="true" />
+
+      <main>
+        <div id="hero" className="hero">
+          <p className="scroll-cue" aria-hidden="true">
+            scroll
+          </p>
+        </div>
+
+        <section id="intro" className="intro" data-length="110" aria-labelledby="intro-name">
+          <h1 id="intro-name" className="name" data-unit="dom">
+            <Words text={identity.name.toUpperCase()} />
+          </h1>
+          <p className="role" data-unit="dom">
+            <Words text={identity.title.toUpperCase()} />
+          </p>
+          <p className="thesis" data-unit="canvas">
+            <Words text={identity.thesis} />
+          </p>
+        </section>
+
+        <section id="signal" className="signal" data-length="170" aria-labelledby="signal-title">
+          <h2 id="signal-title" className="section-title" data-unit="dom">
+            <Words text="SIGNAL" />
+          </h2>
+          <ul className="metrics">
+            {SIGNAL.map((s) => {
+              return (
+                <li key={s.fact} className={s.cleared ? "metric" : "metric is-pending"}>
+                  <span className="metric-value" data-unit="dom">
+                    {s.cleared ? (
+                      <Words text={s.value} />
+                    ) : (
+                      <>
+                        <span className="w" aria-hidden="true">
+                          {s.value}
+                        </span>
+                        <span className="sr-only">Figure pending clearance.</span>
+                      </>
+                    )}
+                  </span>
+                  <span className="metric-caption" data-unit="canvas">
+                    <Words text={s.caption} />
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
+        <section id="next" className="next" aria-label="Coming next">
+          <p className="next-note">WORK · SYSTEMS · STACK · SCHOOL · CONTACT assemble here after Checkpoint 2.</p>
+        </section>
+      </main>
+    </>
   );
 }
