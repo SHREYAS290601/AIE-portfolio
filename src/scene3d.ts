@@ -52,8 +52,14 @@ const MOON_VERT = /* glsl */ `
 `;
 const MOON_FRAG = /* glsl */ `
   ${NOISE}
-  uniform float uCell; uniform float uSeed;
+  uniform float uCell; uniform float uSeed; uniform float uTime; uniform float uAlpha;
   varying vec3 vN; varying vec3 vP;
+  float dotAt(vec2 frag,float L){
+    vec2 q=mat2(0.7071,-0.7071,0.7071,0.7071)*(frag/uCell);
+    float r=sqrt(L)*0.66;
+    return 1.0-smoothstep(r-0.07,r+0.07,length(fract(q)-0.5));
+  }
+  float h1(float x){return fract(sin(x)*43758.5453);}
   void main(){
     vec3 p=normalize(vP);
     float n=fbm(p*2.2+uSeed);
@@ -61,13 +67,19 @@ const MOON_FRAG = /* glsl */ `
     float albedo=clamp(0.62+0.38*n-0.3*crater,0.0,1.0);
     float diff=max(dot(vN,normalize(vec3(-0.55,0.6,0.6))),0.0);
     float L=albedo*diff;
-    vec2 q=mat2(0.7071,-0.7071,0.7071,0.7071)*(gl_FragCoord.xy/uCell);
-    float d=length(fract(q)-0.5);
-    float r=sqrt(L)*0.66;
-    float dotv=1.0-smoothstep(r-0.07,r+0.07,d);
+    // hologram glitch: some rows slide sideways; the pattern re-rolls 4 times a second
+    float row=floor(gl_FragCoord.y/(1.2*uCell));
+    float k=floor(uTime*4.0);
+    float hit=step(0.9,h1(row*12.9898+k*78.233+uSeed));
+    vec2 f=gl_FragCoord.xy+vec2(hit*(h1(row*3.1+k)-0.5)*5.0*uCell,0.0);
+    // misregistered halftone plates: red and blue dots offset from green
+    float sp=0.4*uCell;
+    float dr=dotAt(f+vec2(sp,0.0),L), dg=dotAt(f,L), db=dotAt(f-vec2(sp,0.0),L);
     float rim=pow(1.0-max(vN.z,0.0),4.0);
-    vec3 col=vec3(0.9)*(dotv*0.8+L*0.22)+vec3(0.95)*rim*0.5;
-    gl_FragColor=vec4(col,1.0);
+    float scan=0.7+0.3*step(0.5,fract(gl_FragCoord.y/(0.6*uCell)));
+    vec3 col=vec3(dr,dg,db)*0.85+L*0.15+rim*0.55;
+    float a=clamp(max(max(dr,dg),db)*0.85+L*0.2+rim*0.7,0.0,1.0)*uAlpha*scan;
+    gl_FragColor=vec4(col,a);
   }
 `;
 
@@ -110,15 +122,16 @@ const SMOKE_FRAG = /* glsl */ `
 
 const POST_VERT = /* glsl */ `varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.0,1.0); }`;
 const POST_FRAG = /* glsl */ `
-  uniform sampler2D tScene; uniform sampler2D tSmoke; uniform vec2 uRes; uniform float uShift; uniform float uTime; uniform float uGlitch; uniform vec3 uBg;
+  uniform sampler2D tScene; uniform sampler2D tSmoke; uniform vec2 uRes; uniform float uShift; uniform float uTime; uniform float uGlitch; uniform float uIdle; uniform vec3 uBg;
   varying vec2 vUv;
   float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
   void main(){
     vec2 uv=vUv;
     float row=floor(uv.y*28.0);
     float band=step(0.82,h(vec2(row,floor(uTime*18.0))));
-    uv.x+=uGlitch*band*(h(vec2(row,uTime))-0.5)*0.12;
-    vec2 o=vec2((uShift+uGlitch*14.0)/uRes.x,0.0);
+    float tear=max(uGlitch,uIdle);
+    uv.x+=tear*band*(h(vec2(row,uTime))-0.5)*0.12;
+    vec2 o=vec2((uShift+uGlitch*14.0+uIdle*5.0)/uRes.x,0.0);
     vec3 c=texture2D(tScene,uv).rgb;
     float r=texture2D(tScene,uv+o).r;
     float b=texture2D(tScene,uv-o).b;
@@ -146,8 +159,9 @@ const geom = (a: number[]) => {
   g.setAttribute("position", new BufferAttribute(new Float32Array(a), 3));
   return g;
 };
+const LINE_DIM = 0.7; // everything line-drawn sits back behind the text
 const ink = (opacity: number) =>
-  new LineBasicMaterial({ color: INK, transparent: true, opacity, blending: AdditiveBlending, depthWrite: false });
+  new LineBasicMaterial({ color: INK, transparent: true, opacity: opacity * LINE_DIM, blending: AdditiveBlending, depthWrite: false });
 
 // Anything that draws itself on: a geometry, its full vertex count, and a scroll window.
 type Drawable = { g: BufferGeometry; count: number; a: number; b: number; step: number };
@@ -227,9 +241,11 @@ export function startScene(canvas: HTMLCanvasElement): () => void {
 
   /* moons (halftone) */
   const moonGeo = track(new SphereGeometry(1, 96, 96));
+  const moonTime = { value: 0 };
   const moonMat = (seed: number) => track(new ShaderMaterial({
     vertexShader: MOON_VERT, fragmentShader: MOON_FRAG,
-    uniforms: { uCell: { value: 5 * px }, uSeed: { value: seed } },
+    uniforms: { uCell: { value: 5 * px }, uSeed: { value: seed }, uTime: moonTime, uAlpha: { value: 0.55 } },
+    transparent: true, depthWrite: false,
   }));
   const bigMoon = new Mesh(moonGeo, moonMat(1.7));
   bigMoon.scale.setScalar(2.1);
@@ -282,7 +298,7 @@ export function startScene(canvas: HTMLCanvasElement): () => void {
   astro.add(gyro);
   // dotted ring
   const dotted = new Points(track(geom(circlePts(4.2, 220).slice(0, -3))), track(new PointsMaterial({
-    color: INK, size: 2 * px, sizeAttenuation: false, transparent: true, opacity: 0.55, depthWrite: false,
+    color: INK, size: 2 * px, sizeAttenuation: false, transparent: true, opacity: 0.55 * LINE_DIM, depthWrite: false,
   })));
   astro.add(dotted);
   // node circles riding the rings
@@ -320,7 +336,7 @@ export function startScene(canvas: HTMLCanvasElement): () => void {
       pts.push(Math.cos(t) * rx, Math.sin(t) * ry, 0);
     }
     const line = new Line(track(geom(pts)), track(new LineDashedMaterial({
-      color: INK, dashSize: 0.12, gapSize: 0.14, transparent: true, opacity: 0.35, depthWrite: false,
+      color: INK, dashSize: 0.12, gapSize: 0.14, transparent: true, opacity: 0.35 * LINE_DIM, depthWrite: false,
     })));
     line.computeLineDistances();
     line.rotation.z = tilt;
@@ -349,7 +365,7 @@ export function startScene(canvas: HTMLCanvasElement): () => void {
     constPts.push(x, y, z);
   }
   scene.add(new Points(track(geom(constPts)), track(new PointsMaterial({
-    color: INK, size: 4 * px, sizeAttenuation: false, transparent: true, opacity: 0.9, depthWrite: false,
+    color: INK, size: 4 * px, sizeAttenuation: false, transparent: true, opacity: 0.9 * LINE_DIM, depthWrite: false,
   }))));
   scene.add(new LineSegments(track(draw(geom(constLines), 0.22, 0.5, 2)), track(ink(0.35))));
 
@@ -358,7 +374,7 @@ export function startScene(canvas: HTMLCanvasElement): () => void {
   const postCam = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
   const postU = {
     tScene: { value: rt.texture }, tSmoke: { value: smokeRT.texture }, uRes: { value: new Vector2(1, 1) }, uShift: { value: 1 },
-    uTime: { value: 0 }, uGlitch: { value: 0 }, uBg: { value: new Vector3(...BG) },
+    uTime: { value: 0 }, uGlitch: { value: 0 }, uIdle: { value: 0 }, uBg: { value: new Vector3(...BG) },
   };
   postScene.add(new Mesh(track(new PlaneGeometry(2, 2)), track(new ShaderMaterial({
     vertexShader: POST_VERT, fragmentShader: POST_FRAG, uniforms: postU, depthTest: false, depthWrite: false,
@@ -395,6 +411,7 @@ export function startScene(canvas: HTMLCanvasElement): () => void {
       d.g.setDrawRange(0, Math.floor((d.count * k) / d.step) * d.step);
     }
     starU.uTime.value = time;
+    moonTime.value = time;
     smokeU.forEach((u) => (u.uTime.value = time));
     postU.uTime.value = time;
     state.shift += (1 + Math.min(Math.abs(state.vel) / 900, 6) - state.shift) * 0.12;
@@ -450,7 +467,14 @@ export function startScene(canvas: HTMLCanvasElement): () => void {
   };
   gsap.ticker.add(tick);
 
+  // Idle tear: one short slice glitch every 2.5 to 5 s (well under 3 flashes a second).
+  let idleCall = gsap.delayedCall(3, function idle() {
+    gsap.fromTo(postU.uIdle, { value: 0.4 }, { value: 0, duration: 0.28, ease: "power1.out" });
+    idleCall = gsap.delayedCall(gsap.utils.random(2.5, 5), idle);
+  });
+
   return () => {
+    idleCall.kill();
     gsap.ticker.remove(tick);
     ctx.revert();
     removeEventListener("pointermove", onMove);
