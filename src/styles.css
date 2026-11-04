@@ -126,12 +126,17 @@ main { position: relative; z-index: 2; }
 .next-note { font: 500 14px/20px var(--mono); color: var(--text-muted); }
 
 /* ---------- WORK: lanes pinned left, roles scroll right ---------- */
-.work { padding: 128px var(--gutter) 96px; }
+/* Darker backdrop: hides the 3D field and centered pool behind long-form reading. */
+.work {
+  padding: 128px var(--gutter) 96px;
+  background: #0e0e0e;
+  box-shadow: 0 0 120px 60px #0e0e0e;
+}
 .work > .section-title { margin-bottom: 64px; }
 .work-grid { display: grid; grid-template-columns: 456px 1fr; gap: 64px; align-items: start; }
 .lanes { position: sticky; top: 128px; display: grid; gap: 12px; }
 .lane { display: grid; grid-template-columns: 88px 1fr; align-items: center; gap: 12px; height: 24px; }
-.lane-label { font: 500 12px/16px var(--mono); color: var(--text-muted); letter-spacing: 1px; }
+.lane-label { font: 500 12px/16px var(--mono); color: #d4d8dc; letter-spacing: 1px; }
 .lane-track { position: relative; height: 12px; border-bottom: 1px dashed rgb(228 231 234 / 0.15); }
 .lane-bar {
   position: absolute; top: 0; height: 12px; transform-origin: 0 50%;
@@ -151,20 +156,23 @@ main { position: relative; z-index: 2; }
 }
 
 .roles { display: grid; gap: 160px; }
-.role { display: grid; gap: 16px; padding-bottom: 32px; }
-.role-dates { font: 500 12px/16px var(--mono); color: var(--text-muted); letter-spacing: 2px; }
-.role-org { margin: 0; font: 600 24px/32px var(--mono); color: var(--accent-mint); letter-spacing: 1px; }
+.job { display: grid; gap: 16px; padding-bottom: 32px; }
+.role-dates { font: 500 12px/16px var(--mono); color: #d4d8dc; letter-spacing: 2px; }
+.role-org { margin: 0; font: 700 24px/32px var(--mono); color: var(--accent-mint); letter-spacing: 1px; }
 .role-title { font: 500 16px/24px var(--mono); color: var(--accent-cyan); }
-.role-story { max-width: 640px; font: 400 24px/36px var(--sans); }
+.role-story { max-width: 640px; font: 500 24px/36px var(--sans); color: #ffffff; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip { padding: 4px 8px; border: 1px solid rgb(100 223 223 / 0.5); font: 500 14px/20px var(--mono); }
+.chip {
+  padding: 4px 8px; border: 1px solid var(--accent-cyan); background: rgb(100 223 223 / 0.08);
+  font: 500 14px/20px var(--mono); color: #ffffff;
+}
 .log summary {
   width: max-content; cursor: pointer; padding: 4px 0;
   font: 500 14px/20px var(--mono); color: var(--accent-cyan); letter-spacing: 1px;
 }
 .log summary:hover { color: var(--accent-mint); }
 .log-list { display: grid; gap: 12px; margin-top: 16px; max-width: 680px; }
-.log-list li { padding-left: 16px; border-left: 1px solid rgb(105 48 195 / 0.8); font: 400 16px/24px var(--sans); color: var(--text-muted); }
+.log-list li { padding-left: 16px; border-left: 1px solid rgb(105 48 195 / 0.8); font: 400 16px/24px var(--sans); color: var(--text); }
 
 /* Units start hidden only when the engine runs; without JS everything is plain text. */
 .engine-on [data-unit] { opacity: 0; }

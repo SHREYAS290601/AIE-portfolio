@@ -59,7 +59,7 @@ function RoleArticle({ r }: { r: Role }) {
   const log = r.facts.filter((f) => f.text && !r.headline.includes(f.id));
   const org = r.org.toUpperCase();
   return (
-    <article id={`role-${r.id}`} className="role" data-run data-role={r.id} aria-labelledby={`role-${r.id}-org`}>
+    <article id={`role-${r.id}`} className="job" data-run data-role={r.id} aria-labelledby={`role-${r.id}-org`}>
       <p className="role-dates" data-unit="canvas">
         {dateRange(r.start, r.end)}
       </p>
