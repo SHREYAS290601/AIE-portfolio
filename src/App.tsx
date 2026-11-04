@@ -11,33 +11,32 @@ const LANE_LABEL: Record<string, string> = { premier: "PREMIER", "uiuc-ai": "UIU
 // The axis stretches ZOOM× from 2025 on: on a linear scale the 2026 roles shrink to slivers.
 const ZOOM = 4;
 function Lanes() {
-  const start = monthIndex(education[education.length - 1].start);
+  // Axis runs from January of the first role's year to the end of this month.
+  const start = Math.floor(Math.min(...roles.map((r) => monthIndex(r.start))) / 12) * 12;
+  const now = monthIndex(null);
   const brk = monthIndex("Jan 2025");
   const u = (m: number) => (m <= brk ? m - start : brk - start + (m - brk) * ZOOM);
-  const total = u(monthIndex(null) + 1);
+  const total = u(now + 1);
   const at = (m: number) => (u(m) / total) * 100;
   const pct = (m: number) => `${at(m).toFixed(3)}%`;
-  const span = monthIndex(null) + 1 - start;
-  const rows = [
-    ...roles.map((r) => ({ label: LANE_LABEL[r.id] ?? r.id, bars: [{ id: r.id, s: r.start, e: r.end }] })),
-    { label: "SCHOOL", bars: education.map((d, i) => ({ id: `edu-${i}`, s: d.start, e: d.end as string | null })) },
-  ];
-  const firstYear = Math.floor(start / 12) + 1;
-  const years = Array.from({ length: Math.floor((start + span) / 12) - firstYear + 1 }, (_, i) => firstYear + i);
+  const years = Array.from({ length: Math.floor(now / 12) - start / 12 + 1 }, (_, i) => start / 12 + i);
   return (
     <div className="lanes" aria-hidden="true">
-      {rows.map((row) => (
-        <div className="lane" key={row.label}>
-          <span className="lane-label">{row.label}</span>
+      <div className="lane-rules">
+        {years.map((y) => (
+          <span key={y} className={y * 12 === brk ? "lane-rule is-zoom" : "lane-rule"} style={{ left: pct(y * 12) }} />
+        ))}
+        <span className="lane-now" />
+        <span className="lane-scan" />
+      </div>
+      {roles.map((r) => (
+        <div className="lane" key={r.id} data-role={r.id}>
+          <span className="lane-label">{LANE_LABEL[r.id] ?? r.id}</span>
           <div className="lane-track">
-            {row.bars.map((b) => (
-              <span
-                key={b.id}
-                className="lane-bar"
-                data-role={b.id}
-                style={{ left: pct(monthIndex(b.s)), width: `${(at(monthIndex(b.e) + 1) - at(monthIndex(b.s))).toFixed(3)}%` }}
-              />
-            ))}
+            <span
+              className="lane-bar"
+              style={{ left: pct(monthIndex(r.start)), width: `${(at(monthIndex(r.end) + 1) - at(monthIndex(r.start))).toFixed(3)}%` }}
+            />
           </div>
         </div>
       ))}
@@ -52,6 +51,7 @@ function Lanes() {
           <span className="lane-zoom" style={{ left: pct(brk) }}>
             ×{ZOOM}
           </span>
+          <span className="lane-now-label">NOW</span>
         </div>
       </div>
     </div>

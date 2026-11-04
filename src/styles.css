@@ -188,26 +188,65 @@ main { position: relative; z-index: 2; }
 }
 .work > .section-title { margin-bottom: 64px; }
 .work-grid { display: grid; grid-template-columns: 456px 1fr; gap: 64px; align-items: start; }
-.lanes { position: sticky; top: 128px; display: grid; gap: 12px; }
+/* Lanes: hatched bars on year rules, a NOW cursor, a scan sweep. The lane whose role is in view
+   goes Ben-Day solid and its pink/green plates misregister and tear (~0.3 s of every 3.2 s). */
+.lanes { position: sticky; top: 128px; display: grid; gap: 16px; padding: 16px 0; }
 .lane { display: grid; grid-template-columns: 88px 1fr; align-items: center; gap: 12px; height: 24px; }
-.lane-label { font: 500 12px/16px var(--mono); color: #d4d8dc; letter-spacing: 1px; }
-.lane-track { position: relative; height: 12px; border-bottom: 1px dashed rgb(228 231 234 / 0.15); }
+.lane-label { font: 500 12px/16px var(--mono); color: var(--text-muted); letter-spacing: 1px; transition: color 200ms linear; }
+.lane-track { position: relative; height: 14px; border-bottom: 1px dashed rgb(228 231 234 / 0.12); }
 .lane-bar {
-  position: absolute; top: 0; height: 12px; transform-origin: 0 50%;
-  border: 1px solid var(--accent-cyan); background: rgb(100 223 223 / 0.12);
-  transition: background-color 300ms linear, box-shadow 300ms linear;
+  position: absolute; top: 0; height: 14px; transform-origin: 0 50%;
+  border: 1px solid rgb(100 223 223 / 0.7);
+  background: repeating-linear-gradient(135deg, rgb(100 223 223 / 0.28) 0 2px, transparent 2px 6px);
 }
-.lane-bar.is-active { background: var(--accent-cyan); box-shadow: 0 0 24px var(--accent-purple); }
+.lane-bar::before, .lane-bar::after {
+  content: ""; position: absolute; inset: -1px; border: 1px solid; opacity: 0; pointer-events: none;
+}
+.lane-bar::before { border-color: #ff2e97; }
+.lane-bar::after { border-color: #00ff85; }
+.lane.is-active .lane-label { color: var(--accent-mint); text-shadow: -1px 0 #ff2e97, 1px 0 #00ff85; }
+.lane.is-active .lane-bar {
+  border-color: var(--accent-cyan);
+  background: radial-gradient(circle, rgb(16 16 16 / 0.55) 0.8px, transparent 1.3px) 0 0 / 4px 4px, var(--accent-cyan);
+  box-shadow: 0 0 24px rgb(105 48 195 / 0.9);
+  animation: lane-tear 3.2s steps(1, end) infinite;
+}
+.lane.is-active .lane-bar::before { animation: lane-plate-a 3.2s steps(1, end) infinite; }
+.lane.is-active .lane-bar::after { animation: lane-plate-b 3.2s steps(1, end) infinite; }
+@keyframes lane-tear {
+  0% { clip-path: inset(0 0 55% 0); translate: 6px 0; }
+  3% { clip-path: inset(45% 0 0 0); translate: -4px 0; }
+  6%, 100% { clip-path: none; translate: 0 0; }
+}
+@keyframes lane-plate-a {
+  0% { opacity: 1; transform: translate(-5px, -2px); }
+  3% { opacity: 1; transform: translate(3px, 1px); }
+  6%, 100% { opacity: 0.8; transform: translate(-2px, -1px); }
+}
+@keyframes lane-plate-b {
+  0% { opacity: 1; transform: translate(5px, 2px); }
+  3% { opacity: 1; transform: translate(-3px, -1px); }
+  6%, 100% { opacity: 0.8; transform: translate(2px, 1px); }
+}
+.lane-rules { position: absolute; inset: 16px 0 56px 100px; pointer-events: none; }
+.lane-rule { position: absolute; top: 0; bottom: 0; border-left: 1px dashed rgb(228 231 234 / 0.1); }
+.lane-rule.is-zoom { border-left-color: rgb(128 255 219 / 0.4); }
+.lane-now { position: absolute; top: -8px; bottom: 0; right: 0; border-right: 1px solid var(--accent-mint); animation: lane-blink 1.2s steps(1, end) infinite; }
+.lane-scan { position: absolute; inset: 0; overflow: hidden; }
+.lane-scan::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 94%, rgb(128 255 219 / 0.08) 99.5%, rgb(128 255 219 / 0.7) 100%);
+  animation: lane-sweep 5s linear infinite;
+}
+@keyframes lane-sweep { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes lane-blink { 50% { opacity: 0.2; } }
 .lane-axis .lane-track { border-bottom: 0; }
 .lane-year { position: absolute; top: 0; translate: -50% 0; font: 400 12px/16px var(--mono); color: var(--text-muted); }
 .lane-zoom {
-  position: absolute; top: 24px; translate: -50% 0; padding-top: 4px;
+  position: absolute; top: 20px; translate: -50% 0;
   font: 500 12px/16px var(--mono); color: var(--accent-mint);
 }
-.lane-zoom::before {
-  content: ""; position: absolute; left: 50%; bottom: 100%; height: 196px;
-  border-left: 1px dashed rgb(128 255 219 / 0.4);
-}
+.lane-now-label { position: absolute; top: 20px; right: 0; font: 500 12px/16px var(--mono); color: var(--accent-mint); letter-spacing: 1px; }
 
 .roles { display: grid; gap: 160px; }
 .job { display: grid; gap: 16px; padding-bottom: 32px; }
@@ -279,4 +318,5 @@ main { position: relative; z-index: 2; }
   .stage, .flight, .inspector, .hud, .pool-glitch, .glitch-screen { display: none; }
   section { opacity: 0; transition: opacity 400ms linear; }
   section.is-in { opacity: 1; }
+  .lane-scan, .lane-now { animation: none; display: none; }
 }

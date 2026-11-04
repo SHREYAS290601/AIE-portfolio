@@ -841,7 +841,7 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
       for (const a of gsap.utils.toArray<HTMLElement>("article[data-role]")) {
         ScrollTrigger.create({
           trigger: a, start: "top 55%", end: "bottom 55%",
-          toggleClass: { targets: `.lane-bar[data-role="${a.dataset.role}"]`, className: "is-active" },
+          toggleClass: { targets: `.lane[data-role="${a.dataset.role}"]`, className: "is-active" },
         });
       }
     }
