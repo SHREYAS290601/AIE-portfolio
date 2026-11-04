@@ -1,5 +1,8 @@
 import { useEffect } from "react";
-import { CHIPS, dateRange, education, identity, isCleared, monthIndex, roles, SIGNAL, type Role } from "./data/content";
+import {
+  CASES, CHIPS, dateRange, education, identity, isCleared, monthIndex, roles, SIGNAL, skills,
+  type CaseStudy, type Role,
+} from "./data/content";
 import { startEngine } from "./engine";
 
 const LANE_LABEL: Record<string, string> = { premier: "PREMIER", "uiuc-ai": "UIUC AI", dsrs: "DSRS", apptware: "APPTWARE" };
@@ -52,6 +55,82 @@ function Lanes() {
         </div>
       </div>
     </div>
+  );
+}
+
+function CaseArticle({ c, n }: { c: CaseStudy; n: number }) {
+  return (
+    <article id={`case-${c.id}`} className="case" data-run aria-labelledby={`case-${c.id}-title`}>
+      <div className="case-head">
+        <span className="case-index" data-unit="canvas">
+          {String(n).padStart(2, "0")}
+        </span>
+        <h3 id={`case-${c.id}-title`} className="case-title" data-unit={c.title.length < 40 ? "dom" : "canvas"}>
+          <Words text={c.title.toUpperCase()} />
+        </h3>
+      </div>
+      <dl className="case-body">
+        <dt>Problem</dt>
+        <dd data-unit="canvas">{c.problem}</dd>
+        <dt>Built</dt>
+        <dd data-unit="canvas">{c.built}</dd>
+        <dt>How it's verified</dt>
+        <dd data-unit="canvas">{c.verified}</dd>
+      </dl>
+      <div className="case-side">
+        <figure className="diagram" data-unit="canvas" data-nolines aria-label={`${c.title} architecture`}>
+          {c.diagram.map((stage, i) => (
+            <div key={i} className="dstage">
+              {stage.map((node) => (
+                <div key={node} className="node">
+                  {node}
+                </div>
+              ))}
+            </div>
+          ))}
+        </figure>
+        <p className="case-label">Numbers</p>
+        <ul className="chips">
+          {c.numbers.map((x) => (
+            <li key={x} className="chip" data-unit="canvas">
+              {x}
+            </li>
+          ))}
+        </ul>
+        <p className="case-label">Stack</p>
+        <p className="case-stack" data-unit="canvas">
+          {c.stack.join(" · ")}
+        </p>
+      </div>
+    </article>
+  );
+}
+
+// Only confirmed contacts exist in the bundle (see vite.config.ts); nothing renders until then.
+function ContactLinks() {
+  const { email, linkedin, portfolio } = identity.contact;
+  const links = [
+    email && { label: "Email", href: `mailto:${email.value}`, text: email.value },
+    linkedin && { label: "LinkedIn", href: linkedin.value, text: "LinkedIn" },
+    portfolio && { label: "Portfolio", href: portfolio.value, text: "Portfolio" },
+  ].filter((l): l is { label: string; href: string; text: string } => Boolean(l));
+  if (!links.length) {
+    return (
+      <p className="contact-note" data-unit="canvas">
+        Links publish once confirmed.
+      </p>
+    );
+  }
+  return (
+    <ul className="contact-links">
+      {links.map((l) => (
+        <li key={l.label} data-unit="canvas">
+          <a href={l.href} rel="noopener noreferrer" target={l.href.startsWith("http") ? "_blank" : undefined}>
+            {l.text}
+          </a>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -230,8 +309,73 @@ export default function App() {
           </div>
         </section>
 
-        <section id="next" className="next" aria-label="Coming next">
-          <p className="next-note">SYSTEMS · STACK · SCHOOL · CONTACT assemble here next.</p>
+        <section id="systems" className="systems" data-run aria-labelledby="systems-title">
+          <h2 id="systems-title" className="section-title" data-unit="dom">
+            <Words text="SYSTEMS" />
+          </h2>
+          <div className="cases">
+            {CASES.map((c, i) => (
+              <CaseArticle key={c.id} c={c} n={i + 1} />
+            ))}
+          </div>
+        </section>
+
+        {/* STACK: glyphs scatter into an unsorted cloud, then sort into the 7 categories. */}
+        <section id="stack" className="stack" data-run data-pin="1" data-length="150" data-cloud="1" aria-labelledby="stack-title">
+          <h2 id="stack-title" className="section-title" data-unit="dom">
+            <Words text="STACK" />
+          </h2>
+          <div className="stack-grid">
+            {skills.map((s) => (
+              <div key={s.category} className="stack-cat">
+                <h3 className="stack-name" data-unit="dom">
+                  <Words text={s.category.toUpperCase()} />
+                </h3>
+                <ul className="stack-items">
+                  {s.items.map((it) => (
+                    <li key={it} data-unit="canvas">
+                      {it}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="school" className="school" data-run aria-labelledby="school-title">
+          <h2 id="school-title" className="section-title" data-unit="dom">
+            <Words text="SCHOOL" />
+          </h2>
+          <div className="degrees">
+            {education.map((d) => (
+              <div key={d.school} className="degree">
+                <h3 className="degree-school" data-unit={d.school.length < 40 ? "dom" : "canvas"}>
+                  <Words text={d.school} />
+                </h3>
+                <p className="degree-name" data-unit="canvas">
+                  {d.degree}
+                </p>
+                <p className="degree-meta" data-unit="canvas">
+                  {`GPA ${d.gpa} · ${dateRange(d.start, d.end)} · ${d.location.toUpperCase()}`}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* CONTACT: the page collapses back into the pangram, which becomes the contact line. */}
+        <section
+          id="contact" className="contact" data-run data-pin="1" data-length="160"
+          data-collapse="1" data-assemble="0.5,0.92" aria-labelledby="contact-title"
+        >
+          <h2 id="contact-title" className="section-title" data-unit="dom">
+            <Words text="CONTACT" />
+          </h2>
+          <p className="contact-line" data-unit="canvas">
+            {"Let's talk about your data."}
+          </p>
+          <ContactLinks />
         </section>
       </main>
     </>

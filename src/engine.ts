@@ -58,7 +58,16 @@ type Box = {
   kind: "section" | "heading" | "word" | "line"; label: string; at: number;
   rx: number; ry: number; w: number; h: number; docX: number; docY: number;
 };
-type Run = { section: HTMLElement; p: number; top: number; left: number; visible: boolean; units: Unit[]; boxes: Box[] };
+type Collapse = { g: Glyph; run: Run; s: number };
+type Run = {
+  section: HTMLElement; p: number; top: number; left: number; visible: boolean; units: Unit[]; boxes: Box[];
+  srcs: Src[]; // pool glyph positions this run flies from
+  cloud: boolean; // glyphs detour through a scattered cloud before sorting into place
+  collapse: Collapse[]; // glyphs from the rest of the page that stream back into the pool
+  st?: ScrollTrigger;
+};
+const COLLAPSE_CAP = 1500;
+const COLLAPSE_END = 0.4; // share of the contact run spent collapsing the page
 type SvgBox = {
   root: SVGGElement; stroke: SVGPathElement; dash: SVGPathElement; ticks: SVGPathElement;
   chip: SVGGElement; chipRect: SVGRectElement; chipText: SVGTextElement; xy: SVGTextElement;
@@ -277,6 +286,12 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
     const r = s.getBoundingClientRect();
     return { x: r.left, y: r.top, h: r.height };
   });
+  // The pool's hero-size positions (build runs before the dock tween, so the pool is untransformed).
+  // CONTACT reassembles from these after the page collapses back into the full-size sentence.
+  const srcsHero: Src[] = poolSpans.map((s) => {
+    const r = s.getBoundingClientRect();
+    return { x: r.left, y: r.top, h: r.height };
+  });
   const byChar = new Map<string, number[]>();
   [...pangram].forEach((c, i) => {
     if (c === " ") return;
@@ -306,6 +321,7 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
 
   function buildRun(section: HTMLElement): Run {
     const sr = section.getBoundingClientRect();
+    const win = (section.dataset.assemble?.split(",").map(Number) ?? ASSEMBLE) as [number, number];
     const own = [...section.querySelectorAll<HTMLElement>("[data-unit]")].filter((el) => el.closest("[data-run]") === section);
     const units: Unit[] = own.map((el) => {
       const targets = measureChars(el, sr.left, sr.top);
@@ -319,8 +335,8 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
       return {
         el,
         mode: el.dataset.unit === "dom" ? "dom" : "canvas",
-        a: ASSEMBLE[0],
-        b: ASSEMBLE[1],
+        a: win[0],
+        b: win[1],
         glyphs,
         words: [...el.querySelectorAll<HTMLElement>(".w")],
         op: "",
@@ -330,8 +346,7 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
     if (total > PARTICLE_CAP) console.warn(`#${section.id}: ${total} glyphs over cap; word-by-word mode not built yet`);
 
     const boxes: Box[] = [];
-    const landAt = (gs: Glyph[]) =>
-      ASSEMBLE[0] + (ASSEMBLE[1] - ASSEMBLE[0]) * (Math.max(...gs.map((g) => g.s)) + FLIGHT) - BOX_LEAD;
+    const landAt = (gs: Glyph[]) => win[0] + (win[1] - win[0]) * (Math.max(...gs.map((g) => g.s)) + FLIGHT) - BOX_LEAD;
     const rel = (r: DOMRect) => ({
       rx: r.left - sr.left, ry: r.top - sr.top, w: r.width, h: r.height,
       docX: r.left + scrollX, docY: r.top + scrollY,
@@ -347,7 +362,7 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
           }
         }
         boxes.push({ kind: "heading", label: label(u.el), at: landAt(u.glyphs) + 0.02, ...rel(u.el.getBoundingClientRect()) });
-      } else {
+      } else if (!u.el.hasAttribute("data-nolines")) {
         // Body: a box per rendered line, never per word.
         const lines = new Map<number, Glyph[]>();
         for (const g of u.glyphs) {
@@ -368,8 +383,17 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
         }
       }
     }
+    // Diagram nodes: every node gets its own box, labelled with its text, as it lands.
+    const glyphsAll = units.flatMap((u) => u.glyphs);
+    for (const node of section.querySelectorAll<HTMLElement>(".node")) {
+      if (node.closest("[data-run]") !== section) continue;
+      const gs = glyphsAll.filter((g) => node.contains(g.parent));
+      if (gs.length) {
+        boxes.push({ kind: "word", label: `${label(node)} ${node.textContent?.trim() ?? ""}`, at: landAt(gs), ...rel(node.getBoundingClientRect()) });
+      }
+    }
     if (section.tagName === "SECTION" || section.tagName === "ARTICLE") {
-      boxes.push({ kind: "section", label: label(section), at: SECTION_BOX_AT, ...rel(sr) });
+      boxes.push({ kind: "section", label: label(section), at: Math.min(win[1], SECTION_BOX_AT + (win[1] - ASSEMBLE[1])), ...rel(sr) });
     }
     if (import.meta.env.DEV) {
       for (const b of boxes) {
@@ -378,7 +402,22 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
         }
       }
     }
-    return { section, p: 0, top: sr.top, left: sr.left, visible: false, units, boxes };
+    const collapse = section.dataset.collapse === "1";
+    return {
+      section, p: 0, top: sr.top, left: sr.left, visible: false, units, boxes,
+      srcs: collapse && !mobile ? srcsHero : srcs,
+      cloud: section.dataset.cloud === "1",
+      collapse: [],
+    };
+  }
+
+  // CONTACT's collapse samples glyphs from every other run (capped), so the whole page streams home.
+  for (const r of runs) {
+    if (r.section.dataset.collapse !== "1" || mobile) continue;
+    const all: Collapse[] = [];
+    for (const o of runs) if (o !== r) for (const u of o.units) for (const g of u.glyphs) all.push({ g, run: o, s: 0 });
+    const step = Math.max(1, Math.ceil(all.length / COLLAPSE_CAP));
+    r.collapse = all.filter((_, i) => i % step === 0).map((c, i) => ({ ...c, s: ((hash(i, 99) % 1000) / 1000) * 0.3 }));
   }
 
   // Headings fly as DOM clones in an aria-hidden layer; body glyphs go to the canvas.
@@ -513,6 +552,8 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
 
   /* ---------- per-frame render ---------- */
 
+  const contactRun = runs.find((r) => r.section.dataset.collapse === "1");
+  let hudFinal = false;
   const emitUntil = new Float64Array(pangram.length);
   const emitOn: boolean[] = new Array(pangram.length).fill(false);
   let dirty = true;
@@ -547,6 +588,23 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
         nodes++;
         if (r.visible && (b.kind === "section" || local < 1)) live.push({ b, r, local });
       }
+      // CONTACT: glyphs from the whole page stream back into the full-size pool.
+      if (r.collapse.length && r.visible) {
+        const cp = clamp01(r.p / COLLAPSE_END);
+        if (cp > 0 && cp < 1) {
+          for (const c of r.collapse) {
+            const t = clamp01((cp - c.s) / 0.7);
+            if (t <= 0 || t >= 1) continue;
+            const dst = srcsHero[c.g.src], e = ease(t);
+            const x0 = c.run.left + c.g.rx, y0 = c.run.top + c.g.ry;
+            const h = c.g.h + (dst.h - c.g.h) * e;
+            const cell = atlas.cell(t > 0.7 ? pangram[c.g.src] : c.g.ch, c.g.font, c.g.color);
+            c2d.globalAlpha = 1 - t * 0.5;
+            c2d.drawImage(atlas.canvas, cell.x, cell.y, cell.w, cell.h, x0 + (dst.x - x0) * e - 1, y0 + (dst.y - y0) * e, (cell.w / cell.h) * h, h);
+          }
+          c2d.globalAlpha = 1;
+        }
+      }
       for (const u of r.units) {
         const uu = clamp01((r.p - u.a) / (u.b - u.a));
         if (mobile) {
@@ -572,10 +630,21 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
           }
           if (hidden) continue;
           if (t < 0.12) emitUntil[g.src] = now + EMIT_HOLD_MS;
-          const src = srcs[g.src];
+          const src = r.srcs[g.src];
           const e = ease(t);
-          const x = src.x + (r.left + g.rx - src.x) * e;
-          const y = src.y + (r.top + g.ry - src.y) * e;
+          const tx = r.left + g.rx, ty = r.top + g.ry;
+          let x: number, y: number;
+          if (r.cloud) {
+            // first half: scatter to a random point on screen; second half: sort into place
+            const mx = ((hash(g.seed, 7) % 1000) / 1000) * vw, my = ((hash(g.seed, 13) % 1000) / 1000) * vh;
+            const half = t < 0.5;
+            const k = ease(half ? t * 2 : (t - 0.5) * 2);
+            x = half ? src.x + (mx - src.x) * k : mx + (tx - mx) * k;
+            y = half ? src.y + (my - src.y) * k : my + (ty - my) * k;
+          } else {
+            x = src.x + (tx - src.x) * e;
+            y = src.y + (ty - src.y) * e;
+          }
           const h = src.h + (g.h - src.h) * e;
           const ch = displayChar(g, t);
           if (g.node) {
@@ -629,16 +698,25 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
       else put(sb, sb.root, "vis", "visibility", "hidden");
     });
 
-    const gText = String(26 + landed);
-    if (hudGlyphs.textContent !== gText) hudGlyphs.textContent = gText;
-    const nText = String(nodes);
-    if (hudNodes.textContent !== nText) hudNodes.textContent = nText;
+    // At CONTACT the HUD locks: totals stop at the full page count and turn mint.
+    const final = contactRun ? contactRun.p >= 0.95 : false;
+    if (final !== hudFinal) {
+      hudFinal = final;
+      hudGlyphs.parentElement?.classList.toggle("is-final", final);
+    }
+    if (!final) {
+      const gText = String(26 + landed);
+      if (hudGlyphs.textContent !== gText) hudGlyphs.textContent = gText;
+      const nText = String(nodes);
+      if (hudNodes.textContent !== nText) hudNodes.textContent = nText;
+    }
   }
 
   const ctx = gsap.context(() => {
     // Hero: the pool shrinks in place to a dim centered source behind the text.
     // Both states are fixed, so Flip.fit is scroll-independent.
     let heroST: ScrollTrigger | undefined;
+    let heroVars: gsap.TweenVars | undefined;
     const glitchLayer = document.querySelector<HTMLElement>(".glitch-screen");
     // Armed only once the hero top has been seen, so a reload restored mid-page never fires it off-screen.
     let armed = false;
@@ -651,6 +729,7 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
     };
     if (!mobile) {
       const vars = Flip.fit(pool, twin, { getVars: true, scale: true }) as gsap.TweenVars;
+      heroVars = vars;
       heroST = gsap.to(pool, {
         ...vars,
         opacity: 0.22,
@@ -689,7 +768,7 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
 
     for (const r of runs) {
       const pin = !mobile && r.section.dataset.pin === "1";
-      gsap.to(r, {
+      r.st = gsap.to(r, {
         p: 1,
         ease: "none",
         onUpdate: markDirty,
@@ -701,6 +780,22 @@ function build(resizeAt: number, once: { glitched: boolean }): () => void {
           scrub: 0.6,
           onRefresh: markDirty,
         },
+      }).scrollTrigger;
+    }
+
+    // CONTACT: once the page has streamed home, the pool grows back to the hero sentence, then
+    // fades as the contact line assembles out of it. Full circle.
+    const st = contactRun?.st;
+    if (st && heroVars && !mobile) {
+      const home = Object.fromEntries(Object.keys(heroVars).map((k) => [k, k.startsWith("scale") ? 1 : 0]));
+      const at = (f: number) => () => st.start + (st.end - st.start) * f;
+      gsap.fromTo(pool, { ...heroVars, opacity: 0.22 }, {
+        ...home, opacity: 1, ease: "power2.inOut", immediateRender: false,
+        scrollTrigger: { start: at(COLLAPSE_END - 0.1), end: at(COLLAPSE_END + 0.1), scrub: 0.5 },
+      });
+      gsap.fromTo(pool, { opacity: 1 }, {
+        opacity: 0, ease: "none", immediateRender: false,
+        scrollTrigger: { start: at(0.55), end: at(0.8), scrub: 0.5 },
       });
     }
 

@@ -122,16 +122,66 @@ main { position: relative; z-index: 2; }
 .metric.is-pending .metric-value { color: var(--text-muted); }
 .metric-caption { display: block; margin-top: 8px; font: 400 16px/24px var(--sans); color: var(--text-muted); }
 
-.next { min-height: 60vh; padding: 96px var(--gutter); }
-.next-note { font: 500 14px/20px var(--mono); color: var(--text-muted); }
+/* ---------- SYSTEMS ---------- */
+.systems, .school { padding: 128px var(--gutter) 96px; }
+.systems > .section-title, .school > .section-title { margin-bottom: 64px; }
+.cases { display: grid; gap: 160px; }
+.case { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 64px; }
+.case-head { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 16px; }
+.case-index { font: 500 14px/20px var(--mono); color: var(--accent-purple); letter-spacing: 2px; }
+.case-title { margin: 0; font: 700 28px/36px var(--mono); color: var(--accent-mint); }
+.case-body { display: grid; gap: 8px; margin: 0; align-content: start; }
+.case-body dt, .case-label { margin-top: 16px; font: 500 12px/16px var(--mono); color: var(--accent-cyan); letter-spacing: 2px; text-transform: uppercase; }
+.case-body dd { margin: 0; font: 400 18px/28px var(--sans); color: var(--text); }
+.case-side { display: grid; gap: 12px; align-content: start; }
+.case-stack { font: 500 14px/20px var(--mono); color: #d4d8dc; }
+.diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; margin: 0 0 8px; }
+.dstage { position: relative; display: grid; gap: 8px; }
+.dstage:not(:last-child)::after {
+  content: "→"; position: absolute; right: -24px; top: 50%; translate: 0 -50%;
+  font: 500 14px/20px var(--mono); color: var(--accent-cyan);
+}
+.node {
+  padding: 12px 16px; border: 1px solid var(--accent-cyan); background: rgb(100 223 223 / 0.06);
+  font: 500 14px/20px var(--mono); color: #ffffff; white-space: nowrap;
+}
+
+/* ---------- STACK ---------- */
+.stack {
+  min-height: 100vh; padding: 96px var(--gutter) 64px;
+  display: flex; flex-direction: column; justify-content: center; gap: 40px;
+}
+.stack-grid { display: grid; grid-template-columns: repeat(auto-fill, 368px); gap: 32px 24px; }
+.stack-name { margin: 0 0 8px; font: 700 14px/20px var(--mono); color: var(--accent-mint); letter-spacing: 1px; }
+.stack-items { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.stack-items li { font: 400 15px/24px var(--sans); color: var(--text); }
+
+/* ---------- SCHOOL ---------- */
+.degrees { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 560px)); gap: 48px; }
+.degree { display: grid; gap: 8px; align-content: start; }
+.degree-school { margin: 0; font: 700 24px/32px var(--mono); color: var(--accent-mint); }
+.degree-name { font: 400 20px/28px var(--sans); color: #ffffff; }
+.degree-meta { font: 500 12px/16px var(--mono); color: #d4d8dc; letter-spacing: 2px; }
+
+/* ---------- CONTACT ---------- */
+.contact {
+  min-height: 100vh; padding: 96px var(--gutter);
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px; text-align: center;
+}
+.contact-line { font: 600 48px/56px var(--mono); color: #ffffff; }
+.contact-note { font: 500 14px/20px var(--mono); color: var(--text-muted); }
+.contact-links { display: flex; gap: 24px; }
+.contact-links a { font: 500 18px/28px var(--mono); color: var(--accent-cyan); text-underline-offset: 4px; }
+.contact-links a:hover { color: var(--accent-mint); }
+.hud.is-final, .hud.is-final span { color: var(--accent-mint); }
 
 /* ---------- WORK: lanes pinned left, roles scroll right ---------- */
 .work { padding: 128px var(--gutter) 96px; }
 
 /* Each section sits on a translucent darker panel, feathered top and bottom so it blends
    into the page; the 3D field stays faintly visible through it. */
-.intro, .signal, .work { position: relative; }
-.intro::before, .signal::before, .work::before {
+.intro, .signal, .work, .systems, .stack, .school, .contact { position: relative; }
+.intro::before, .signal::before, .work::before, .systems::before, .stack::before, .school::before, .contact::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: rgb(4 4 4 / 0.62);
   mask-image: linear-gradient(to bottom, transparent 0, #000 160px, #000 calc(100% - 160px), transparent 100%);
@@ -210,6 +260,17 @@ main { position: relative; z-index: 2; }
   .roles { gap: 64px; padding-left: 16px; border-left: 1px solid rgb(100 223 223 / 0.4); }
   .role-org { font-size: 20px; line-height: 28px; }
   .role-story { font-size: 20px; line-height: 28px; }
+  .systems, .school { padding: 64px 16px; }
+  .case { grid-template-columns: 1fr; }
+  .case-title { font-size: 22px; line-height: 30px; }
+  .diagram { gap: 12px; }
+  .dstage:not(:last-child)::after { display: none; }
+  .node { white-space: normal; }
+  .stack { min-height: auto; padding: 64px 16px; }
+  .stack-grid { grid-template-columns: 1fr; }
+  .degrees { grid-template-columns: 1fr; }
+  .contact { min-height: auto; padding: 96px 16px; }
+  .contact-line { font-size: 28px; line-height: 36px; }
 }
 
 /* ---------- reduced motion: static text, sections crossfade, no inspector ---------- */
