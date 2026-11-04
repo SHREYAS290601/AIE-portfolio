@@ -126,11 +126,15 @@ main { position: relative; z-index: 2; }
 .next-note { font: 500 14px/20px var(--mono); color: var(--text-muted); }
 
 /* ---------- WORK: lanes pinned left, roles scroll right ---------- */
-/* Darker backdrop: hides the 3D field and centered pool behind long-form reading. */
-.work {
-  padding: 128px var(--gutter) 96px;
-  background: var(--bg);
-  box-shadow: 0 0 120px 60px var(--bg);
+.work { padding: 128px var(--gutter) 96px; }
+
+/* Each section sits on a translucent darker panel, feathered top and bottom so it blends
+   into the page; the 3D field stays faintly visible through it. */
+.intro, .signal, .work { position: relative; }
+.intro::before, .signal::before, .work::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: rgb(4 4 4 / 0.62);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 160px, #000 calc(100% - 160px), transparent 100%);
 }
 .work > .section-title { margin-bottom: 64px; }
 .work-grid { display: grid; grid-template-columns: 456px 1fr; gap: 64px; align-items: start; }
